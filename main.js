@@ -1,5 +1,5 @@
-var money = 0;
-var flowers = 0;
+let money = 0;
+let flowers = 0;
 
 function test(text) {
     alert(text);
