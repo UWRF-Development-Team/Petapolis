@@ -11,7 +11,7 @@ function buyGardener() {
     if (money >= 0) {
         gardenerCount++;
         //TODO: fix this screwing up the GUI
-        document.getElementById("gardenerBuy").innerText = `gardener \n (${gardenerCount})`;
+        document.querySelector("#gardenerBuy > h2").innerHTML = `gardener \n (${gardenerCount})`;
         money -= 0;
     } else {
         alert("You can't afford a gardener right now!");

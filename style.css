@@ -12,6 +12,7 @@
     display: flex;
     justify-content: space-around;
     align-items: stretch;
+    width: 25%;
     gap: 5%;
 }
 
@@ -20,7 +21,8 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    overflow: hidden;
     padding: 5%;
-    min-width: 50%;
+    min-width: 35%;
     aspect-ratio: 1;
 }
