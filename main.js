@@ -3,14 +3,13 @@ let flowers = 0;
 let gardenerCount = 0;
 
 function buyGardener() {
-    //TODO: implement an actual cost once flowers are obtainable
     if (gardenerCount === 0) {
         window.setInterval(gardenersGardening, 1000);
     }
 
+    //TODO: implement an actual cost once flowers are obtainable
     if (money >= 0) {
         gardenerCount++;
-        //TODO: fix this screwing up the GUI
         document.querySelector("#gardenerBuy > h2").innerHTML = `gardener \n (${gardenerCount})`;
         money -= 0;
     } else {
