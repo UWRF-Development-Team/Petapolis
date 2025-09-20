@@ -28,6 +28,7 @@ function test(text) {
 
 // 1 to 1 conversion babyyyyy
 function flowerToMoney() {
-    money = flowers;
+    money += flowers;
     flowers = 0;
+    console.log("$"+money);
 }
