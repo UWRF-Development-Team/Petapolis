@@ -26,6 +26,8 @@ function test(text) {
     alert(text);
 }
 
+// 1 to 1 conversion babyyyyy
 function flowerToMoney() {
-    // TODO all this
+    money = flowers;
+    flowers = 0;
 }
