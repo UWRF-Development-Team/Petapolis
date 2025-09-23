@@ -1,6 +1,8 @@
 let money = 0;
 let flowers = 0;
 let gardenerCount = 0;
+let prestigeCount = 0;
+let gardenerCost = 100;
 
 function buyGardener() {
     if (gardenerCount === 0) {
@@ -8,10 +10,11 @@ function buyGardener() {
     }
 
     //TODO: implement an actual cost once flowers are obtainable
-    if (money >= 0) {
+    if (money >= gardenerCost) {
         gardenerCount++;
         document.querySelector("#gardenerBuy > h2").innerHTML = `gardener \n (${gardenerCount})`;
-        money -= 0;
+        money -= gardenerCost;
+        gardenerCost *= 1.25;
     } else {
         alert("You can't afford a gardener right now!");
     }
@@ -43,4 +46,12 @@ function changeFlowers(amount) {
 function changeMoney(amount) {
     money += amount;
     document.getElementById("money_display").innerHTML = "Money: " + money;
+}
+  
+function prestige() {
+    money = 0
+    flowers = 0
+    gardenerCount = 0
+    prestigeCount += 1
+    console.log("prestige count: " + prestigeCount)
 }
