@@ -14,8 +14,9 @@ function buyGardener() {
         gardenerCount++;
         document.querySelector("#gardenerBuy > #count").innerHTML = `(${gardenerCount})`;
         money -= gardenerCost;
-        gardenerCost *= 1.25;
+        gardenerCost = Math.round(gardenerCost * 1.25);
         document.querySelector("#gardenerBuy > #cost").innerHTML = '$'+`${gardenerCost}`;
+
     } else {
         alert("You can't afford a gardener right now!");
     }
