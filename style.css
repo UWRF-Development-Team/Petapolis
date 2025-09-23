@@ -27,3 +27,8 @@
     min-width: 35%;
     aspect-ratio: 1;
 }
+.display {
+    background-color: rgba(173, 232, 255, 128);
+    border-width: 1px;
+    border-color: black;
+}
