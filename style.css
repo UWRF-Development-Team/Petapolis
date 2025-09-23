@@ -27,3 +27,11 @@
     min-width: 35%;
     aspect-ratio: 1;
 }
+
+.box {
+    margin: 15% auto auto;
+    width: 5%;
+    padding: 5%;
+    cursor: pointer;
+    background: red;
+}
