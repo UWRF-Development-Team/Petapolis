@@ -55,5 +55,7 @@ function prestige() {
     flowers = 0
     gardenerCount = 0
     prestigeCount += 1
+    gardenerCost = 100
+    document.querySelector("#gardenerBuy > #cost").innerHTML = '$'+`${gardenerCost}`;
     console.log("prestige count: " + prestigeCount)
 }
