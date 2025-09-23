@@ -37,5 +37,7 @@ function flowerToMoney() {
 function prestige(){
     money = 0
     flowers = 0
+    gardenerCount = 0
     prestigeCount += 1
+    console.log("prestige count: " + prestigeCount)
 }
