@@ -1,3 +1,9 @@
+body{
+    background-image: url("media/programmerArt/background.png");
+    background-position:  top;
+    background-size: cover;
+}
+
 .content {
     /* temporary Of course but its just organized like this so we can have a single window styleclass rather than reusing styles */
     background-color: rgb(255, 164, 225);
