@@ -28,6 +28,12 @@
     aspect-ratio: 1;
 }
 
+.display {
+    background-color: rgba(173, 232, 255, 128);
+    border-width: 1px;
+    border-color: black;
+
+
 .box {
     margin: 15% auto auto;
     width: 5%;
