@@ -1,3 +1,9 @@
+body{
+    background-image: url("media/programmerArt/background.png");
+    background-position:  top;
+    background-size: cover;
+}
+
 .content {
     /* temporary Of course but its just organized like this so we can have a single window styleclass rather than reusing styles */
     background-color: rgb(255, 164, 225);
@@ -26,7 +32,15 @@
     padding: 5%;
     min-width: 35%;
     aspect-ratio: 1;
+    flex-wrap: wrap;
 }
+
+.display {
+    background-color: rgba(173, 232, 255, 128);
+    border-width: 1px;
+    border-color: black;
+}
+
 
 .box {
     margin: 15% auto auto;
