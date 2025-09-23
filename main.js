@@ -1,6 +1,7 @@
 let money = 0;
 let flowers = 0;
 let gardenerCount = 0;
+let prestigeCount = 0;
 let gardenerCost = 100;
 
 function buyGardener() {
@@ -33,4 +34,12 @@ function flowerToMoney() {
     money += flowers;
     flowers = 0;
     console.log("$"+money);
+}
+
+function prestige(){
+    money = 0
+    flowers = 0
+    gardenerCount = 0
+    prestigeCount += 1
+    console.log("prestige count: " + prestigeCount)
 }
