@@ -13,7 +13,7 @@ function buyGardener() {
     if (money >= gardenerCost) {
         gardenerCount++;
         document.querySelector("#gardenerBuy > #count").innerHTML = `(${gardenerCount})`;
-        money -= gardenerCost;
+        changeMoney(-gardenerCost);
         gardenerCost = Math.round(gardenerCost * 1.25);
         document.querySelector("#gardenerBuy > #cost").innerHTML = '$'+`${gardenerCost}`;
 
