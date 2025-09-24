@@ -72,15 +72,14 @@ let prestigeCount = 0;
 
 function buyGardener() {
     if (gardener.buy()) {
+        if (gardener.getAmount() === 1) {
+            window.setInterval(() => gardener.harvest(), 1000);
+        }
         document.querySelector("#gardenerBuy > h2").innerHTML = `gardener \n (${gardener.getAmount()})`;
         document.querySelector("#gardenerBuy > #count").innerHTML = `(${gardener.getAmount()})`;
         document.querySelector("#gardenerBuy > #cost").innerHTML = '$'+`${gardener.getBuyCost()}`;
     } else {
         alert("You can't afford a gardener right now!");
-    }
-
-    if(gardener.getAmount() > 0) {
-        window.setInterval(() => gardener.harvest(), 1000);
     }
 }
 
@@ -95,9 +94,6 @@ function increaseMultiplier(multiplier) {
             break;
     }
 }
-
-
-
 
 // 1 to 1 conversion babyyyyy
 function flowerToMoney() {
