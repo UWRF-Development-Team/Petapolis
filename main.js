@@ -69,9 +69,7 @@ let prestigeCount = 0;
 function buyGardener() {
 
     if (gardener.buy()) {
-        document.querySelector("#gardenerBuy > h2").innerHTML = `gardener \n (${gardener.getAmount()})`;
-        document.querySelector("#gardenerBuy > #count").innerHTML = `(${gardener.getAmount()})`;
-        document.querySelector("#gardenerBuy > #cost").innerHTML = '$'+`${gardener.getBuyCost()}`;
+        refreshGardenerShop();
     } else {
         alert("You can't afford a gardener right now!");
     }
@@ -79,6 +77,12 @@ function buyGardener() {
     if(gardener.getAmount() > 0) {
         window.setInterval(() => gardener.harvest(), 1000);
     }
+}
+
+function refreshGardenerShop() {
+    document.querySelector("#gardenerBuy > h2").innerHTML = `gardener \n (${gardener.getAmount()})`;
+    document.querySelector("#gardenerBuy > #count").innerHTML = `(${gardener.getAmount()})`;
+    document.querySelector("#gardenerBuy > #cost").innerHTML = '$'+`${gardener.getBuyCost()}`;
 }
 
 function increaseMultiplier(multiplier) {
@@ -126,9 +130,10 @@ function addMoney(amount) {
 }
   
 function prestige() {
-    money = 0
-    flowers = 0
+    setMoney(0);
+    setFlowers(0);
     gardener.reset(50, 50, 1.2, 1.2, 1, 1, 0);
-    prestigeCount += 1
-    console.log("prestige count: " + prestigeCount)
+    refreshGardenerShop();
+    prestigeCount += 1;
+    alert("You are now prestige " + prestigeCount + "!");
 }
