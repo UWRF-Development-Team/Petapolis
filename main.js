@@ -1,5 +1,5 @@
 class Producer {
-    /*
+    /**
     buyCost is the amount it cost, in dollars, to buy the next producer
     multiplierCost is the amount it cost, in dollars, to buy the next multiplier upgrade
     costScaling is how quickly buyCost and multiplierCost increase
@@ -22,7 +22,7 @@ class Producer {
     // used to buy a new producer
     buy() {
         if (money >= this.buyCost) {
-            changeMoney(-this.buyCost);
+            addMoney(-this.buyCost);
             this.buyCost = Math.round(this.buyCost * this.costScaling);
             this.amount++;
             return true;
@@ -34,7 +34,7 @@ class Producer {
     // this buys an increase to the multiplier
     upgrade() {
         if (money >= this.multiplierCost) {
-            changeMoney(-this.multiplierCost);
+            addMoney(-this.multiplierCost);
             this.multiplierCost = Math.round(this.multiplierCost * this.costScaling);
             this.multiplier *= this.multiplierScaling;
             return true;
@@ -60,7 +60,7 @@ class Producer {
 
     // increases flowers based on # of producers, their base production, and the multiplier
     harvest() {
-        changeFlowers(Math.round(this.amount * this.baseProduction * this.multiplier));
+        addFlowers(Math.round(this.amount * this.baseProduction * this.multiplier));
     }
 }
 
@@ -72,15 +72,19 @@ let prestigeCount = 0;
 
 function buyGardener() {
     if (gardener.buy()) {
-        if (gardener.getAmount() === 1) {
-            window.setInterval(() => gardener.harvest(), 1000);
-        }
-        document.querySelector("#gardenerBuy > h2").innerHTML = `gardener \n (${gardener.getAmount()})`;
-        document.querySelector("#gardenerBuy > #count").innerHTML = `(${gardener.getAmount()})`;
-        document.querySelector("#gardenerBuy > #cost").innerHTML = '$'+`${gardener.getBuyCost()}`;
+        refreshGardenerShop();
     } else {
         alert("You can't afford a gardener right now!");
     }
+}
+
+function refreshGardenerShop() {
+    if (gardener.getAmount() === 1) {
+        window.setInterval(() => gardener.harvest(), 1000);
+    }
+    document.querySelector("#gardenerBuy > h2").innerHTML = `gardener \n (${gardener.getAmount()})`;
+    document.querySelector("#gardenerBuy > #count").innerHTML = `(${gardener.getAmount()})`;
+    document.querySelector("#gardenerBuy > #cost").innerHTML = '$'+`${gardener.getBuyCost()}`;
 }
 
 function increaseMultiplier(multiplier) {
@@ -97,27 +101,39 @@ function increaseMultiplier(multiplier) {
 
 // 1 to 1 conversion babyyyyy
 function flowerToMoney() {
-    changeMoney(flowers);
-    changeFlowers(-flowers);
+    addMoney(flowers);
+    addFlowers(-flowers);
     console.log("$"+money);
 }
 
-//changes flower count by a given value
-function changeFlowers(amount) {
+function setFlowers(amount) {
+    flowers = amount;
+    document.getElementById("flower_display").innerHTML = "Flowers: " + flowers;
+}
+
+//increases flower count by a given value
+function addFlowers(amount) {
     flowers += amount;
     document.getElementById("flower_display").innerHTML = "Flowers: " + flowers;
 }
 
-//changes money count by a given value
-function changeMoney(amount) {
+function setMoney(amount) {
+    money = amount;
+    document.getElementById("dollar_display").innerHTML = "Money: " + money;
+}
+
+//increases money count by a given value
+function addMoney(amount) {
     money += amount;
     document.getElementById("dollar_display").innerHTML = "Money: " + money;
 }
-  
+
+//resets game state
 function prestige() {
-    money = 0
-    flowers = 0
+    setMoney(0);
+    setFlowers(0);
     gardener = new Producer(50, 50, 1.2, 1.2, 1, 1, 0);
-    prestigeCount += 1
-    console.log("prestige count: " + prestigeCount)
+    refreshGardenerShop();
+    prestigeCount += 1;
+    alert("You are now prestige " + prestigeCount + "!");
 }
