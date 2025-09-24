@@ -73,7 +73,7 @@ let prestigeCount = 0;
 function buyGardener() {
     if (gardener.buy()) {
         if (gardener.getAmount() === 1) {
-            window.setInterval(gardener.harvest, 1000);
+            window.setInterval(() => gardener.harvest(), 1000);
         }
         refreshGardenerShop();
     } else {
