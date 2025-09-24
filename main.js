@@ -11,7 +11,7 @@ class Producer {
 
     buy() {
         if (money >= this.buyCost) {
-            changeMoney(-this.buyCost);
+            addMoney(-this.buyCost);
             this.buyCost = Math.round(this.buyCost * this.costScaling);
             this.amount++;
             return true;
@@ -22,7 +22,7 @@ class Producer {
 
     upgrade() {
         if (money >= this.multiplierCost) {
-            changeMoney(-this.multiplierCost);
+            addMoney(-this.multiplierCost);
             this.multiplierCost = Math.round(this.multiplierCost * this.costScaling);
             this.multiplier *= this.multiplierScaling;
             return true;
@@ -56,7 +56,7 @@ class Producer {
 
 
     harvest() {
-        changeFlowers(Math.round(this.amount * this.baseProduction * this.multiplier));
+        addFlowers(Math.round(this.amount * this.baseProduction * this.multiplier));
     }
 }
 
@@ -98,19 +98,19 @@ function increaseMultiplier(multiplier) {
 
 // 1 to 1 conversion babyyyyy
 function flowerToMoney() {
-    changeMoney(flowers);
-    changeFlowers(-flowers);
+    addMoney(flowers);
+    addFlowers(-flowers);
     console.log("$"+money);
 }
 
-//changes flower count by a given value
-function changeFlowers(amount) {
+//increases flower count by a given value
+function addFlowers(amount) {
     flowers += amount;
     document.getElementById("flower_display").innerHTML = "Flowers: " + flowers;
 }
 
-//changes money count by a given value
-function changeMoney(amount) {
+//increases money count by a given value
+function addMoney(amount) {
     money += amount;
     document.getElementById("dollar_display").innerHTML = "Money: " + money;
 }
