@@ -103,10 +103,20 @@ function flowerToMoney() {
     console.log("$"+money);
 }
 
+function setFlowers(amount) {
+    flowers = amount;
+    document.getElementById("flower_display").innerHTML = "Flowers: " + flowers;
+}
+
 //increases flower count by a given value
 function addFlowers(amount) {
     flowers += amount;
     document.getElementById("flower_display").innerHTML = "Flowers: " + flowers;
+}
+
+function setMoney(amount) {
+    money = amount;
+    document.getElementById("dollar_display").innerHTML = "Money: " + money;
 }
 
 //increases money count by a given value
