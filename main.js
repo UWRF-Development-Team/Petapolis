@@ -128,7 +128,8 @@ function addMoney(amount) {
     money += amount;
     document.getElementById("dollar_display").innerHTML = "Money: " + money;
 }
-  
+
+//resets game state
 function prestige() {
     setMoney(0);
     setFlowers(0);
