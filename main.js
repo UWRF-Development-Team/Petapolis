@@ -11,7 +11,7 @@ class Producer {
 
     buy() {
         if (money >= this.buyCost) {
-            changeMoney(-this.buyCost);
+            addMoney(-this.buyCost);
             this.buyCost = Math.round(this.buyCost * this.costScaling);
             this.amount++;
             return true;
@@ -22,7 +22,7 @@ class Producer {
 
     upgrade() {
         if (money >= this.multiplierCost) {
-            changeMoney(-this.multiplierCost);
+            addMoney(-this.multiplierCost);
             this.multiplierCost = Math.round(this.multiplierCost * this.costScaling);
             this.multiplier *= this.multiplierScaling;
             return true;
@@ -56,7 +56,7 @@ class Producer {
 
 
     harvest() {
-        changeFlowers(Math.round(this.amount * this.baseProduction * this.multiplier));
+        addFlowers(Math.round(this.amount * this.baseProduction * this.multiplier));
     }
 }
 
@@ -69,9 +69,7 @@ let prestigeCount = 0;
 function buyGardener() {
 
     if (gardener.buy()) {
-        document.querySelector("#gardenerBuy > h2").innerHTML = `gardener \n (${gardener.getAmount()})`;
-        document.querySelector("#gardenerBuy > #count").innerHTML = `(${gardener.getAmount()})`;
-        document.querySelector("#gardenerBuy > #cost").innerHTML = '$'+`${gardener.getBuyCost()}`;
+        refreshGardenerShop();
     } else {
         alert("You can't afford a gardener right now!");
     }
@@ -79,6 +77,12 @@ function buyGardener() {
     if(gardener.getAmount() > 0) {
         window.setInterval(() => gardener.harvest(), 1000);
     }
+}
+
+function refreshGardenerShop() {
+    document.querySelector("#gardenerBuy > h2").innerHTML = `gardener \n (${gardener.getAmount()})`;
+    document.querySelector("#gardenerBuy > #count").innerHTML = `(${gardener.getAmount()})`;
+    document.querySelector("#gardenerBuy > #cost").innerHTML = '$'+`${gardener.getBuyCost()}`;
 }
 
 function increaseMultiplier(multiplier) {
@@ -98,27 +102,39 @@ function increaseMultiplier(multiplier) {
 
 // 1 to 1 conversion babyyyyy
 function flowerToMoney() {
-    changeMoney(flowers);
-    changeFlowers(-flowers);
+    addMoney(flowers);
+    addFlowers(-flowers);
     console.log("$"+money);
 }
 
-//changes flower count by a given value
-function changeFlowers(amount) {
+function setFlowers(amount) {
+    flowers = amount;
+    document.getElementById("flower_display").innerHTML = "Flowers: " + flowers;
+}
+
+//increases flower count by a given value
+function addFlowers(amount) {
     flowers += amount;
     document.getElementById("flower_display").innerHTML = "Flowers: " + flowers;
 }
 
-//changes money count by a given value
-function changeMoney(amount) {
+function setMoney(amount) {
+    money = amount;
+    document.getElementById("dollar_display").innerHTML = "Money: " + money;
+}
+
+//increases money count by a given value
+function addMoney(amount) {
     money += amount;
     document.getElementById("dollar_display").innerHTML = "Money: " + money;
 }
-  
+
+//resets game state
 function prestige() {
-    money = 0
-    flowers = 0
+    setMoney(0);
+    setFlowers(0);
     gardener.reset(50, 50, 1.2, 1.2, 1, 1, 0);
-    prestigeCount += 1
-    console.log("prestige count: " + prestigeCount)
+    refreshGardenerShop();
+    prestigeCount += 1;
+    alert("You are now prestige " + prestigeCount + "!");
 }
