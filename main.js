@@ -12,7 +12,7 @@ class Producer {
     buy() {
         if (money >= this.buyCost) {
             changeMoney(-this.buyCost);
-            this.buyCost *= this.costScaling;
+            this.buyCost = Math.round(this.buyCost * this.costScaling);
             this.amount++;
             return true;
         } else {
@@ -23,7 +23,7 @@ class Producer {
     upgrade() {
         if (money >= this.multiplierCost) {
             changeMoney(-this.multiplierCost);
-            this.multiplierCost *= this.costScaling;
+            this.multiplierCost = Math.round(this.multiplierCost * this.costScaling);
             this.multiplier *= this.multiplierScaling;
             return true;
         } else {
@@ -43,8 +43,20 @@ class Producer {
         return this.multiplierCost;
     }
 
+    reset(buyCost, multiplierCost, costScaling, multiplierScaling, baseProduction, multiplier, amount) {
+        this.buyCost = buyCost;
+        this.multiplierCost = multiplierCost;
+        this.costScaling = costScaling;
+        this.multiplierScaling = multiplierScaling;
+        this.baseProduction = baseProduction;
+        this.multiplier = multiplier;
+        this.amount = amount;
+    }
+
+
+
     harvest() {
-        changeFlowers(this.amount * this.baseProduction * this.multiplier);
+        changeFlowers(Math.round(this.amount * this.baseProduction * this.multiplier));
     }
 }
 
@@ -81,9 +93,7 @@ function increaseMultiplier(multiplier) {
     }
 }
 
-function test(text) {
-    return;
-}
+
 
 
 // 1 to 1 conversion babyyyyy
@@ -108,7 +118,7 @@ function changeMoney(amount) {
 function prestige() {
     money = 0
     flowers = 0
-    gardenerCount = 0
+    gardener.reset(50, 50, 1.2, 1.2, 1, 1, 0);
     prestigeCount += 1
     console.log("prestige count: " + prestigeCount)
 }
