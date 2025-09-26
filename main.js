@@ -69,7 +69,7 @@ let flowers = 0;
 let gardener = new Producer(50, 50, 1.2, 1.2, 1, 1, 0);
 let prestigeCount = 0;
 
-
+//buys a gardener
 function buyGardener() {
     if (gardener.buy()) {
         if (gardener.getAmount() === 1) {
