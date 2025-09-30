@@ -70,6 +70,7 @@ let gardener = new Producer(50, 50, 1.2, 1.2, 1, 1, 0);
 let prestigeCount = 0;
 let latitude;
 let longitude;
+APIKey = getAPIKey();
 let currentWeather;
 getCurrentWeather();
 
