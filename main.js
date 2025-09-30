@@ -117,6 +117,7 @@ function addFlowers(amount) {
     document.getElementById("flower_display").innerHTML = "Flowers: " + flowers;
 }
 
+
 function setMoney(amount) {
     money = amount;
     document.getElementById("dollar_display").innerHTML = "Money: " + money;
@@ -130,10 +131,15 @@ function addMoney(amount) {
 
 //resets game state
 function prestige() {
-    setMoney(0);
-    setFlowers(0);
-    gardener = new Producer(50, 50, 1.2, 1.2, 1, 1, 0);
-    refreshGardenerShop();
-    prestigeCount += 1;
-    alert("You are now prestige " + prestigeCount + "!");
+    console.log(flowers);
+    if (flowers < 1000000){
+        alert("You can't prestige!! Reach 1,000,000 flowers to prestige.");
+    } else {
+        setMoney(0);
+        setFlowers(0);
+        gardener = new Producer(50, 50, 1.2, 1.2, 1, 1, 0);
+        refreshGardenerShop();
+        prestigeCount += 1;
+        alert("You are now prestige " + prestigeCount + "!");
+    }
 }
