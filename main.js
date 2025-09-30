@@ -73,7 +73,7 @@ let prestigeCount = 0;
 function refreshShop(producer) {
     switch (producer) {
         case 'gardener':
-            document.querySelector("#gardenerBuy > #gardnerCount").innerHTML = `(${gardener.getAmount()})`;
+            document.querySelector("#gardenerBuy > #gardenerCount").innerHTML = `(${gardener.getAmount()})`;
             document.querySelector("#gardenerBuy > #gardenerCost").innerHTML = '$'+`${gardener.getBuyCost()}`;
             break;
         case 'trowel':
