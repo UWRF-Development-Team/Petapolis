@@ -70,6 +70,7 @@ let flowers = 0;
 let gardener = new Producer(50, 50, 1.2, 1.2, 1, 1, 0);
 let prestigeCount = 0;
 
+// takes the name of the producer and changes the cost and count in the html file
 function refreshShop(producer) {
     switch (producer) {
         case 'gardener':
@@ -83,7 +84,7 @@ function refreshShop(producer) {
     }
 }
 
-
+// takes the name of the producer and buys one
 function buy(producer) {
     switch (producer) {
         case 'gardener':
@@ -97,7 +98,7 @@ function buy(producer) {
             }
             break;
         case 'trowel':
-            if(trowel.buy()) {
+            if (trowel.buy()) {
                 refreshShop('trowel');
             } else {
                 alert("You can't afford a trowel right now!");
@@ -105,6 +106,7 @@ function buy(producer) {
             break;
     }
 }
+
 
 function increaseMultiplier(multiplier) {
     switch (multiplier) {
@@ -130,7 +132,6 @@ function setFlowers(amount) {
     document.getElementById("flower_display").innerHTML = "Flowers: " + flowers;
 }
 
-
 //increases flower count by a given value
 function addFlowers(amount) {
     flowers += amount;
@@ -150,12 +151,17 @@ function addMoney(amount) {
 
 //resets game state
 function prestige() {
+    console.log(flowers);
+    if (flowers < 1000000){
+        alert("You can't prestige!! Reach 1,000,000 flowers to prestige.");
+        return;
+    }
     setMoney(0);
     setFlowers(0);
     gardener = new Producer(50, 50, 1.2, 1.2, 1, 1, 0);
     trowel = new Producer(50, 10000000000, 1.2, 1.2, 1, 1, 2);
-    prestigeCount += 1;
     refreshShop('gardener');
     refreshShop('trowel');
+    prestigeCount += 1;
     alert("You are now prestige " + prestigeCount + "!");
 }
