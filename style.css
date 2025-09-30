@@ -25,14 +25,13 @@ body{
 
 .button {
     display: flex;
+    flex-flow: column wrap;
     justify-content: center;
-    align-items: center;
+    align-content: center;
     cursor: pointer;
-    overflow: hidden;
-    padding: 5%;
+    padding: 2.5%;
     min-width: 35%;
     aspect-ratio: 1;
-    flex-wrap: wrap;
 }
 
 .display {
