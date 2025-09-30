@@ -98,7 +98,7 @@ function buy(producer) {
             }
             break;
         case 'trowel':
-            if(trowel.buy()) {
+            if (trowel.buy()) {
                 refreshShop('trowel');
             } else {
                 alert("You can't afford a trowel right now!");
