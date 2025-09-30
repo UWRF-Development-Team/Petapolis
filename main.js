@@ -65,27 +65,48 @@ class Producer {
 }
 
 let money = 0;
+let trowel = new Producer(50, 10000000000, 1.2, 1.2, 1, 1, 1);
 let flowers = 0;
 let gardener = new Producer(50, 50, 1.2, 1.2, 1, 1, 0);
 let prestigeCount = 0;
 
-//buys a gardener
-function buyGardener() {
-    if (gardener.buy()) {
-        if (gardener.getAmount() === 1) {
-            window.setInterval(() => gardener.harvest(), 1000);
-        }
-        refreshGardenerShop();
-    } else {
-        alert("You can't afford a gardener right now!");
+// takes the name of the producer and changes the cost and count in the html file
+function refreshShop(producer) {
+    switch (producer) {
+        case 'gardener':
+            document.querySelector("#gardenerBuy > #gardenerCount").innerHTML = `(${gardener.getAmount()})`;
+            document.querySelector("#gardenerBuy > #gardenerCost").innerHTML = '$'+`${gardener.getBuyCost()}`;
+            break;
+        case 'trowel':
+            document.querySelector("#trowelBuy > #trowelCount").innerHTML = `(${trowel.getAmount()})`;
+            document.querySelector("#trowelBuy > #trowelCost").innerHTML = '$'+`${trowel.getBuyCost()}`;
+            break;
     }
 }
 
-function refreshGardenerShop() {
-    document.querySelector("#gardenerBuy > h2").innerHTML = `gardener \n (${gardener.getAmount()})`;
-    document.querySelector("#gardenerBuy > #count").innerHTML = `(${gardener.getAmount()})`;
-    document.querySelector("#gardenerBuy > #cost").innerHTML = '$'+`${gardener.getBuyCost()}`;
+// takes the name of the producer and buys one
+function buy(producer) {
+    switch (producer) {
+        case 'gardener':
+            if (gardener.buy()) {
+                if (gardener.getAmount() === 1) {
+                    window.setInterval(() => gardener.harvest(), 1000);
+                }
+                refreshShop('gardener');
+            } else {
+                alert("You can't afford a gardener right now!");
+            }
+            break;
+        case 'trowel':
+            if (trowel.buy()) {
+                refreshShop('trowel');
+            } else {
+                alert("You can't afford a trowel right now!");
+            }
+            break;
+    }
 }
+
 
 function increaseMultiplier(multiplier) {
     switch (multiplier) {
@@ -117,7 +138,6 @@ function addFlowers(amount) {
     document.getElementById("flower_display").innerHTML = "Flowers: " + flowers;
 }
 
-
 function setMoney(amount) {
     money = amount;
     document.getElementById("dollar_display").innerHTML = "Money: " + money;
@@ -134,12 +154,14 @@ function prestige() {
     console.log(flowers);
     if (flowers < 1000000){
         alert("You can't prestige!! Reach 1,000,000 flowers to prestige.");
-    } else {
-        setMoney(0);
-        setFlowers(0);
-        gardener = new Producer(50, 50, 1.2, 1.2, 1, 1, 0);
-        refreshGardenerShop();
-        prestigeCount += 1;
-        alert("You are now prestige " + prestigeCount + "!");
+        return;
     }
+    setMoney(0);
+    setFlowers(0);
+    gardener = new Producer(50, 50, 1.2, 1.2, 1, 1, 0);
+    trowel = new Producer(50, 10000000000, 1.2, 1.2, 1, 1, 2);
+    refreshShop('gardener');
+    refreshShop('trowel');
+    prestigeCount += 1;
+    alert("You are now prestige " + prestigeCount + "!");
 }

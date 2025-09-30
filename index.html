@@ -12,13 +12,15 @@
                 <div class="content button" onclick="flowerToMoney()">
                     <img alt="flower and money symbol with arrows" src="media/programmerArt/exchange.png">
                 </div>
-            <div class="content button" onclick="increaseMultiplier('gardener')">
+                <div class="content button" onclick="buy('trowel')" id="trowelBuy">
+                    <div id="trowelCost">$50</div>
                     <h2>trowel</h2>
+                    <div id="trowelCount">(1)</div>
                 </div>
-                <div class="content button" onclick="buyGardener()" id="gardenerBuy">
-                    <span id="cost">$50</span>
+                <div class="content button" onclick="buy('gardener')" id="gardenerBuy">
+                    <div id="gardenerCost">$50</div>
                     <h2>gardener</h2>
-                    <span id="count">(0)</span>
+                    <div id="gardenerCount">(0)</div>
                 </div>
                 <div class="content button" onclick="prestige()">
                     <h2>ascend</h2>
@@ -29,6 +31,6 @@
                 <p class="display_text" id="dollar_display">Dollars: 0</p>
             </div>
         </div>
-        <div class="box" onclick="addFlowers(1)"></div>
+        <div class="box" onclick="trowel.harvest()"></div>
     </body>
 </html>
