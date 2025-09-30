@@ -73,12 +73,10 @@ let prestigeCount = 0;
 function refreshShop(producer) {
     switch (producer) {
         case 'gardener':
-            document.querySelector("#gardenerBuy > h2").innerHTML = `gardener \n (${gardener.getAmount()})`;
             document.querySelector("#gardenerBuy > #gardnerCount").innerHTML = `(${gardener.getAmount()})`;
             document.querySelector("#gardenerBuy > #gardenerCost").innerHTML = '$'+`${gardener.getBuyCost()}`;
             break;
         case 'trowel':
-            document.querySelector("#trowelBuy > h2").innerHTML = `trowel \n (${trowel.getAmount()})`;
             document.querySelector("#trowelBuy > #trowelCount").innerHTML = `(${trowel.getAmount()})`;
             document.querySelector("#trowelBuy > #trowelCost").innerHTML = '$'+`${trowel.getBuyCost()}`;
             break;
