@@ -25,10 +25,11 @@ body{
 
 .button {
     display: flex;
-    flex-flow: column wrap;
+    flex-flow: column nowrap;
     justify-content: center;
     align-content: center;
     cursor: pointer;
+    overflow: hidden;
     padding: 2.5%;
     min-width: 35%;
     aspect-ratio: 1;
