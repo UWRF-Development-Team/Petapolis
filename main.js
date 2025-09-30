@@ -147,10 +147,10 @@ async function getCurrentWeather() {
     getCurrentLocation();
     const response = await fetch("http://api.weatherapi.com/v1/current.json", {
         headers: {
-            "key"=APIKey,
-            "q"=`${latitude},${longitude}`,
+            "key": APIKey,
+            "q": `${latitude},${longitude}`,
         },
-        body: JSON.stringify({ condition:text: }),
+        body: JSON.stringify({ condition:text }),
     })
     console.log("Hello world!")
 }
