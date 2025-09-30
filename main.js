@@ -143,9 +143,15 @@ function prestige() {
     alert("You are now prestige " + prestigeCount + "!");
 }
 
-function getCurrentWeather() {
+async function getCurrentWeather() {
     getCurrentLocation();
-
+    const response = await fetch("http://api.weatherapi.com/v1/current.json", {
+        headers: {
+            "key"=APIKey,
+            "q"=`${latitude},${longitude}`,
+        },
+        body: JSON.stringify({ condition:text: }),
+    })
     console.log("Hello world!")
 }
 
