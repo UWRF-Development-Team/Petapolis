@@ -2,7 +2,7 @@ class Producer {
     /**
     buyCost is the amount it cost, in dollars, to buy the next producer
     multiplierCost is the amount it cost, in dollars, to buy the next multiplier upgrade
-    costScaling is how quickly buyCost and multiplierCost increase
+    `costScaling is how quickly buyCost and multiplierCost increase
     It is currently a fixed value, but I think we should change it to scale exponentially in the future
     multiplierScaling is how quickly the multiplier grows
     not sure if this is needed, but I thought it should be included just in case
@@ -84,6 +84,18 @@ function refreshShop(producer) {
     }
 }
 
+function checkCosts() {
+    if (money < trowel.getBuyCost())
+        document.querySelector("#trowelBuy").classList.add("grey");
+    else
+        document.querySelector("#trowelBuy").classList.remove("grey");
+
+    if (money < gardener.getBuyCost())
+        document.querySelector("#gardenerBuy").classList.add("grey");
+    else
+        document.querySelector("#gardenerBuy").classList.remove("grey");
+}
+
 // takes the name of the producer and buys one
 function buy(producer) {
     switch (producer) {
@@ -93,15 +105,11 @@ function buy(producer) {
                     window.setInterval(() => gardener.harvest(), 1000);
                 }
                 refreshShop('gardener');
-            } else {
-                alert("You can't afford a gardener right now!");
             }
             break;
         case 'trowel':
             if (trowel.buy()) {
                 refreshShop('trowel');
-            } else {
-                alert("You can't afford a trowel right now!");
             }
             break;
     }
@@ -146,6 +154,7 @@ function setMoney(amount) {
 //increases money count by a given value
 function addMoney(amount) {
     money += amount;
+    checkCosts();
     document.getElementById("dollar_display").innerHTML = "Money: " + money;
 }
 

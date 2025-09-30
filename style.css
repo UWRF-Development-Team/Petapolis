@@ -54,3 +54,7 @@ body{
     cursor: pointer;
     background: red;
 }
+
+.grey {
+    background-color: grey;
+}
