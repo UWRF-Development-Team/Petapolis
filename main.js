@@ -68,8 +68,8 @@ let money = 0;
 let flowers = 0;
 let gardener = new Producer(50, 50, 1.2, 1.2, 1, 1, 0);
 let prestigeCount = 0;
-let latitude;
-let longitude;
+let latitude = 0;
+let longitude = 0;
 APIKey = getAPIKey();
 let currentWeather;
 getCurrentWeather();
@@ -145,13 +145,21 @@ function prestige() {
 
 async function getCurrentWeather() {
     getCurrentLocation();
-    const response = await fetch("http://api.weatherapi.com/v1/current.json", {
-        headers: {
-            "key": APIKey,
-            "q": `${latitude},${longitude}`,
-        },
-        body: JSON.stringify({ condition:text }),
+    console.log("Latitude: " + latitude +
+                       "\nLongitude: " + longitude)
+
+    const params = new URLSearchParams({
+    key: APIKey,
+    q: `${latitude},${longitude}`
+    });
+    const response = await fetch(`http://api.weatherapi.com/v1/current.json?${params}`)
+    .then(response = response.json())
+    .then(data => {
+    console.log(data.condition);
     })
+    .catch(error => {
+    console.error(error);
+    });
     console.log("Hello world!")
 }
 
@@ -166,8 +174,8 @@ function getCurrentLocation(){
 function success(position){
     latitude = position.coords.latitude;
     longitude = position.coords.longitude;
-    console.log("Latitude: " + position.coords.latitude +
-                   "\nLongitude: " + position.coords.longitude)
+//    console.log("Latitude: " + latitude +
+//                   "\nLongitude: " + longitude)
 }
 
 function error() {
