@@ -68,6 +68,10 @@ let money = 0;
 let flowers = 0;
 let gardener = new Producer(50, 50, 1.2, 1.2, 1, 1, 0);
 let prestigeCount = 0;
+let latitude;
+let longitude;
+let currentWeather;
+getCurrentWeather();
 
 //buys a gardener
 function buyGardener() {
@@ -137,3 +141,32 @@ function prestige() {
     prestigeCount += 1;
     alert("You are now prestige " + prestigeCount + "!");
 }
+
+function getCurrentWeather() {
+    getCurrentLocation();
+
+    console.log("Hello world!")
+}
+
+function getCurrentLocation(){
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(success, error);
+  } else {
+    alert("Geolocation is not supported by this browser.");
+  }
+}
+
+function success(position){
+    latitude = position.coords.latitude;
+    longitude = position.coords.longitude;
+    console.log("Latitude: " + position.coords.latitude +
+                   "\nLongitude: " + position.coords.longitude)
+}
+
+function error() {
+    latitude = 44.8523405;
+    longitude = -92.6233659;
+    alert("Sorry, no location given resorting to a default location.");
+}
+
+
