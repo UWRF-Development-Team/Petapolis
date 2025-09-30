@@ -70,6 +70,7 @@ let flowers = 0;
 let gardener = new Producer(50, 50, 1.2, 1.2, 1, 1, 0);
 let prestigeCount = 0;
 
+// takes the name of the producer and changes the cost and count in the html file
 function refreshShop(producer) {
     switch (producer) {
         case 'gardener':
@@ -83,7 +84,7 @@ function refreshShop(producer) {
     }
 }
 
-
+// takes the name of the producer and buys one
 function buy(producer) {
     switch (producer) {
         case 'gardener':
@@ -105,6 +106,7 @@ function buy(producer) {
             break;
     }
 }
+
 
 function increaseMultiplier(multiplier) {
     switch (multiplier) {
