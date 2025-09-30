@@ -133,7 +133,7 @@ function addMoney(amount) {
 function prestige() {
     console.log(flowers);
     if (flowers < 1000000){
-        alert("You can't prestiege!!");
+        alert("You can't prestige!! Reach 1,000,000 flowers to prestige.");
     } else {
         setMoney(0);
         setFlowers(0);
