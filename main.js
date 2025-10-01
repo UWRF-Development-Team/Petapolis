@@ -120,11 +120,31 @@ function increaseMultiplier(multiplier) {
     }
 }
 
-// 1 to 1 conversion babyyyyy
+function saleHandler() {
+    const saleInput = document.getElementById("saleInput");
+    saleInput.classList.remove("hidden");
+    saleInput.addEventListener("keydown", saleMaker(event, saleInput));
+}
+
+function saleMaker(e, saleInput) {
+    if (e.key === "Enter") {
+        return;
+    }
+    if (!saleInput.innerText.isNumeric()) {
+        return;
+    }
+    saleInput.classList.add("hidden");
+    flowerToMoney(saleInput.innerText);
+}
+
+function flowerToMoney(flowerAmount) {
+    addMoney(flowerAmount);
+    addFlowers(-flowerAmount);
+}
+
 function flowerToMoney() {
     addMoney(flowers);
     addFlowers(-flowers);
-    console.log("$"+money);
 }
 
 function setFlowers(amount) {

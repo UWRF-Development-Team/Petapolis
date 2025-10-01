@@ -54,3 +54,7 @@ body{
     cursor: pointer;
     background: red;
 }
+
+.hidden {
+    visibility: hidden;
+}
