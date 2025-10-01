@@ -91,7 +91,7 @@ class flower {
     }
 
     addFlowerAmount(addAmount){
-        this.amount = this.amount + addAmount
+        this.amount += addAmount;
     }
 
     getFlowerName(){
