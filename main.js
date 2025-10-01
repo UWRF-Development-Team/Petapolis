@@ -64,6 +64,46 @@ class Producer {
     }
 }
 
+class flower {
+    /**
+     name might be redundant based on use.
+     amount how many you have.
+     basePrice base price of the flower
+     demand and rarity aren't needed now but could be useful for stock_exchange in the future.
+     priceScaling could be used to increase price could be used for return upgrades.
+     */
+
+    constructor(name, amount, basePrice) {
+        this.name = name;
+        this.amount = amount;
+        this.basePrice = basePrice;
+        // this.priceScaling = priceScaling;
+        // this.demand = demand;
+        // this.rarity = rarity;
+    }
+
+    getFlowerAmount() {
+        return this.amount;
+    }
+
+    setFlowerAmount(newAmount){
+        this.amount = newAmount
+    }
+
+    addFlowerAmount(addAmount){
+        this.amount = this.amount + addAmount
+    }
+
+    getFlowerName(){
+        return this.name
+    }
+
+    getBasePrice(){
+        return this.basePrice
+    }
+
+}
+
 let money = 0;
 let trowel = new Producer(50, 10000000000, 1.2, 1.2, 1, 1, 1);
 let flowers = 0;
