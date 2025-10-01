@@ -105,11 +105,22 @@ function buy(producer) {
                     window.setInterval(() => gardener.harvest(), 1000);
                 }
                 refreshShop('gardener');
+            } else {
+                // TODO refactor Later cuz what the hell was i thinking here
+                document.querySelector("#gardenerBuy").classList.add('shake');
+                document.querySelector("#gardenerBuy").addEventListener('animationend', () => {
+                    document.querySelector("#gardenerBuy").classList.remove('shake')
+                }, { once: true });
             }
             break;
         case 'trowel':
             if (trowel.buy()) {
                 refreshShop('trowel');
+            } else {
+                document.querySelector("#trowelBuy").classList.add('shake');
+                document.querySelector("#trowelBuy").addEventListener('animationend', () => {
+                    document.querySelector("#trowelBuy").classList.remove('shake')
+                }, { once: true });
             }
             break;
     }
