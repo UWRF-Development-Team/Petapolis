@@ -25,7 +25,9 @@ If applicable, add screenshots to help explain your problem.
 
 **Browser Information:**
  - Browser [e.g. chrome, safari]
- - Version [e.g. 22] (optional)
+ - Version [e.g. 22] [optional]
+
+**Potential solution(s) [optional]**
 
 **Additional context**
 Add any other context about the problem here.
