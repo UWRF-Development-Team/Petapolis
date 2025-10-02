@@ -122,19 +122,22 @@ function increaseMultiplier(multiplier) {
 
 function saleHandler() {
     const saleInput = document.getElementById("saleInput");
-    saleInput.classList.remove("hidden");
-    saleInput.addEventListener("keydown", saleMaker(event, saleInput));
+    const saleDiv = document.getElementById("saleDiv");
+    saleDiv.classList.remove("hidden");
+    //this doesnt work
+    saleInput.addEventListener("keydown", saleMaker(event, saleInput, saleDiv));
 }
 
-function saleMaker(e, saleInput) {
+function saleMaker(e, saleInput, saleDiv) {
     if (e.key === "Enter") {
         return;
     }
-    if (!saleInput.innerText.isNumeric()) {
+    if (!Number.isInteger(saleInput.innerText)) {
         return;
     }
-    saleInput.classList.add("hidden");
+    saleDiv.classList.add("hidden");
     flowerToMoney(saleInput.innerText);
+    saleInput.innerText = "";
 }
 
 function flowerToMoney(flowerAmount) {
