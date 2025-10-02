@@ -85,6 +85,7 @@ function refreshShop(producer) {
 }
 
 function checkCosts() {
+    // TODO refactor All of this with oop because oh my god this is maybe my worst code ever
     if (money < trowel.getBuyCost())
         document.querySelector("#trowelBuy").classList.add("grey");
     else
@@ -94,6 +95,11 @@ function checkCosts() {
         document.querySelector("#gardenerBuy").classList.add("grey");
     else
         document.querySelector("#gardenerBuy").classList.remove("grey");
+
+    if (money < 1000000)
+        document.querySelector("#prestigeBuy").classList.add("grey");
+    else
+        document.querySelector("#prestigeBuy").classList.remove("grey");
 }
 
 // takes the name of the producer and buys one
@@ -171,9 +177,11 @@ function addMoney(amount) {
 
 //resets game state
 function prestige() {
-    console.log(flowers);
-    if (flowers < 1000000){
-        alert("You can't prestige!! Reach 1,000,000 flowers to prestige.");
+    if (money < 1000000){
+        document.querySelector("#prestigeBuy").classList.add('shake');
+        document.querySelector("#prestigeBuy").addEventListener('animationend', () => {
+            document.querySelector("#prestigeBuy").classList.remove('shake')
+        }, { once: true });
         return;
     }
     setMoney(0);
