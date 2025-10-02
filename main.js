@@ -120,27 +120,31 @@ function increaseMultiplier(multiplier) {
     }
 }
 
-function saleHandler() {
-    const saleInput = document.getElementById("saleInput");
-    const saleDiv = document.getElementById("saleDiv");
-    saleDiv.classList.remove("hidden");
-    //this doesnt work
-    saleInput.addEventListener("keydown", saleMaker(event, saleInput, saleDiv));
+document.getElementById("saleInput").addEventListener("keydown", function(event) {saleMaker(event)});
+
+function showSaleDiv() {
+    document.getElementById("saleDiv").classList.remove("hidden");
 }
 
-function saleMaker(e, saleInput, saleDiv) {
-    if (e.key === "Enter") {
+function saleMaker(e) {
+    const saleInput = document.getElementById("saleInput");
+    const saleDiv = document.getElementById("saleDiv");
+    if (e.key !== "Enter") {
         return;
     }
-    if (!Number.isInteger(saleInput.innerText)) {
+    if (isNaN(saleInput.value)) {
+        return;
+    }
+    const flowerAmount = parseInt(saleInput.value);
+    if (flowerAmount > flowers) {
         return;
     }
     saleDiv.classList.add("hidden");
-    flowerToMoney(saleInput.innerText);
-    saleInput.innerText = "";
+    flowerAmountToMoney(flowerAmount);
+    saleInput.value = "";
 }
 
-function flowerToMoney(flowerAmount) {
+function flowerAmountToMoney(flowerAmount) {
     addMoney(flowerAmount);
     addFlowers(-flowerAmount);
 }
