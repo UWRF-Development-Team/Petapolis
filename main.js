@@ -2,7 +2,7 @@ class Producer {
     /**
     buyCost is the amount it cost, in dollars, to buy the next producer
     multiplierCost is the amount it cost, in dollars, to buy the next multiplier upgrade
-    costScaling is how quickly buyCost and multiplierCost increase
+    `costScaling is how quickly buyCost and multiplierCost increase
     It is currently a fixed value, but I think we should change it to scale exponentially in the future
     multiplierScaling is how quickly the multiplier grows
     not sure if this is needed, but I thought it should be included just in case
@@ -124,6 +124,24 @@ function refreshShop(producer) {
     }
 }
 
+function checkCosts() {
+    // TODO refactor All of this with oop because oh my god this is maybe my worst code ever
+    if (money < trowel.getBuyCost())
+        document.querySelector("#trowelBuy").classList.add("grey");
+    else
+        document.querySelector("#trowelBuy").classList.remove("grey");
+
+    if (money < gardener.getBuyCost())
+        document.querySelector("#gardenerBuy").classList.add("grey");
+    else
+        document.querySelector("#gardenerBuy").classList.remove("grey");
+
+    if (money < 1000000)
+        document.querySelector("#prestigeBuy").classList.add("grey");
+    else
+        document.querySelector("#prestigeBuy").classList.remove("grey");
+}
+
 // takes the name of the producer and buys one
 function buy(producer) {
     switch (producer) {
@@ -134,14 +152,21 @@ function buy(producer) {
                 }
                 refreshShop('gardener');
             } else {
-                alert("You can't afford a gardener right now!");
+                // TODO refactor Later cuz what the hell was i thinking here
+                document.querySelector("#gardenerBuy").classList.add('shake');
+                document.querySelector("#gardenerBuy").addEventListener('animationend', () => {
+                    document.querySelector("#gardenerBuy").classList.remove('shake')
+                }, { once: true });
             }
             break;
         case 'trowel':
             if (trowel.buy()) {
                 refreshShop('trowel');
             } else {
-                alert("You can't afford a trowel right now!");
+                document.querySelector("#trowelBuy").classList.add('shake');
+                document.querySelector("#trowelBuy").addEventListener('animationend', () => {
+                    document.querySelector("#trowelBuy").classList.remove('shake')
+                }, { once: true });
             }
             break;
     }
@@ -186,14 +211,17 @@ function setMoney(amount) {
 //increases money count by a given value
 function addMoney(amount) {
     money += amount;
+    checkCosts();
     document.getElementById("dollar_display").innerHTML = "Money: " + money;
 }
 
 //resets game state
 function prestige() {
-    console.log(flowers);
-    if (flowers < 1000000){
-        alert("You can't prestige!! Reach 1,000,000 flowers to prestige.");
+    if (money < 1000000){
+        document.querySelector("#prestigeBuy").classList.add('shake');
+        document.querySelector("#prestigeBuy").addEventListener('animationend', () => {
+            document.querySelector("#prestigeBuy").classList.remove('shake')
+        }, { once: true });
         return;
     }
     setMoney(0);
