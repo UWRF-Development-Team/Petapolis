@@ -60,7 +60,7 @@ class Producer {
 
     // increases flowers based on # of producers, their base production, and the multiplier
     harvest() {
-        addFlowers(Math.round(this.amount * this.baseProduction * this.multiplier));
+        Dandelion.addFlowerAmount(Math.round(this.amount * this.baseProduction * this.multiplier));
     }
 }
 
@@ -84,21 +84,24 @@ class flower {
 
     getFlowerAmount() {
         return this.amount;
+
     }
 
     setFlowerAmount(newAmount){
         this.amount = newAmount
+        document.getElementById("flower_display").innerHTML = "Flowers: " + this.amount;
     }
 
     addFlowerAmount(addAmount){
         this.amount += addAmount;
+        document.getElementById("flower_display").innerHTML = "Flowers: " + this.amount;
     }
 
-    getFlowerName(){
+    getFlowerName() {
         return this.name
     }
 
-    getBasePrice(){
+    getBasePrice() {
         return this.basePrice
     }
 
@@ -106,7 +109,7 @@ class flower {
 
 let money = 0;
 let trowel = new Producer(50, 10000000000, 1.2, 1.2, 1, 1, 1);
-let flowers = 0;
+let Dandelion = new flower("Dandelion", 0, 12 );
 let gardener = new Producer(50, 50, 1.2, 1.2, 1, 1, 0);
 let prestigeCount = 0;
 
@@ -185,23 +188,23 @@ function increaseMultiplier(multiplier) {
     }
 }
 
-// 1 to 1 conversion babyyyyy
+// 1 to 1 conversion babyyyyy, plus a little extra
 function flowerToMoney() {
-    addMoney(flowers);
-    addFlowers(-flowers);
+    addMoney(Dandelion.getFlowerAmount() * Dandelion.getBasePrice());
+    Dandelion.setFlowerAmount(0);
     console.log("$"+money);
 }
 
-function setFlowers(amount) {
-    flowers = amount;
-    document.getElementById("flower_display").innerHTML = "Flowers: " + flowers;
-}
+// function setFlowers(amount) {
+//     flowers = amount;
+//     document.getElementById("flower_display").innerHTML = "Flowers: " + flowers;
+// }
 
 //increases flower count by a given value
-function addFlowers(amount) {
-    flowers += amount;
-    document.getElementById("flower_display").innerHTML = "Flowers: " + flowers;
-}
+// function addFlowers(amount) {
+//     flowers += amount;
+//     document.getElementById("flower_display").innerHTML = "Flowers: " + flowers;
+// }
 
 function setMoney(amount) {
     money = amount;
@@ -217,6 +220,9 @@ function addMoney(amount) {
 
 //resets game state
 function prestige() {
+    console.log(Dandelion.getFlowerAmount());
+    if (Dandelion.getFlowerAmount() < 1000000){
+        alert("You can't prestige!! Reach 1,000,000 flowers to prestige.");
     if (money < 1000000){
         document.querySelector("#prestigeBuy").classList.add('shake');
         document.querySelector("#prestigeBuy").addEventListener('animationend', () => {
@@ -225,7 +231,7 @@ function prestige() {
         return;
     }
     setMoney(0);
-    setFlowers(0);
+    Dandelion.setFlowerAmount(0);
     gardener = new Producer(50, 50, 1.2, 1.2, 1, 1, 0);
     trowel = new Producer(50, 10000000000, 1.2, 1.2, 1, 1, 2);
     refreshShop('gardener');
