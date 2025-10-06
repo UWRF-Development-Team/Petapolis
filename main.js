@@ -112,6 +112,8 @@ let trowel = new Producer(50, 10000000000, 1.2, 1.2, 1, 1, 1);
 let Dandelion = new flower("Dandelion", 0, 12 );
 let gardener = new Producer(50, 50, 1.2, 1.2, 1, 1, 0);
 let prestigeCount = 0;
+let isGoing = false
+let intervalbuffer;
 
 // takes the name of the producer and changes the cost and count in the html file
 function refreshShop(producer) {
@@ -194,6 +196,17 @@ function flowerToMoney() {
     Dandelion.setFlowerAmount(0);
     console.log("$"+money);
 }
+function automonzy(){
+    if (!isGoing) {
+        intervalbuffer = setInterval(() => {
+            console.log(flowerToMoney());
+        }, 1000);
+        isGoing = true
+    } else {
+        clearInterval(intervalbuffer)
+        isGoing = false
+    }
+}
 
 // function setFlowers(amount) {
 //     flowers = amount;
@@ -221,21 +234,22 @@ function addMoney(amount) {
 //resets game state
 function prestige() {
     console.log(Dandelion.getFlowerAmount());
-    if (Dandelion.getFlowerAmount() < 1000000){
+    if (Dandelion.getFlowerAmount() < 1000000) {
         alert("You can't prestige!! Reach 1,000,000 flowers to prestige.");
-    if (money < 1000000){
-        document.querySelector("#prestigeBuy").classList.add('shake');
-        document.querySelector("#prestigeBuy").addEventListener('animationend', () => {
-            document.querySelector("#prestigeBuy").classList.remove('shake')
-        }, { once: true });
-        return;
+        if (money < 1000000) {
+            document.querySelector("#prestigeBuy").classList.add('shake');
+            document.querySelector("#prestigeBuy").addEventListener('animationend', () => {
+                document.querySelector("#prestigeBuy").classList.remove('shake')
+            }, {once: true});
+            return;
+        }
+        setMoney(0);
+        Dandelion.setFlowerAmount(0);
+        gardener = new Producer(50, 50, 1.2, 1.2, 1, 1, 0);
+        trowel = new Producer(50, 10000000000, 1.2, 1.2, 1, 1, 2);
+        refreshShop('gardener');
+        refreshShop('trowel');
+        prestigeCount += 1;
+        alert("You are now prestige " + prestigeCount + "!");
     }
-    setMoney(0);
-    Dandelion.setFlowerAmount(0);
-    gardener = new Producer(50, 50, 1.2, 1.2, 1, 1, 0);
-    trowel = new Producer(50, 10000000000, 1.2, 1.2, 1, 1, 2);
-    refreshShop('gardener');
-    refreshShop('trowel');
-    prestigeCount += 1;
-    alert("You are now prestige " + prestigeCount + "!");
 }
