@@ -199,7 +199,7 @@ function flowerToMoney() {
 function automonzy(){
     if (!isGoing) {
         intervalbuffer = setInterval(() => {
-            console.log(flowerToMoney());
+            (flowerToMoney());
         }, 1000);
         isGoing = true
     } else {
