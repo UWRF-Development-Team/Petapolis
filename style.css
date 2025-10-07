@@ -11,6 +11,13 @@ body{
     box-sizing: border-box;
 }
 
+.toIndexBtn {
+    position: absolute;
+    top: 10px;
+    right: 50px;
+    background: rgb(255, 164, 225);
+}
+
 .shop {
     position: fixed;
     bottom: 0;
