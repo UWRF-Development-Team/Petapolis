@@ -252,4 +252,5 @@ function prestige() {
         prestigeCount += 1;
         alert("You are now prestige " + prestigeCount + "!");
     }
+
 }
