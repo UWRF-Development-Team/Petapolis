@@ -260,7 +260,6 @@ function addMoney(amount) {
 function prestige() {
     console.log(Dandelion.getFlowerAmount());
     if (Dandelion.getFlowerAmount() < 1000000) {
-        alert("You can't prestige!! Reach 1,000,000 flowers to prestige.");
         if (money < 1000000) {
             document.querySelector("#prestigeBuy").classList.add('shake');
             document.querySelector("#prestigeBuy").addEventListener('animationend', () => {
