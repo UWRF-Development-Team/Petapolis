@@ -2,7 +2,7 @@ class Producer {
     /**
     buyCost is the amount it cost, in dollars, to buy the next producer
     multiplierCost is the amount it cost, in dollars, to buy the next multiplier upgrade
-    `costScaling is how quickly buyCost and multiplierCost increase
+    costScaling is how quickly buyCost and multiplierCost increase
     It is currently a fixed value, but I think we should change it to scale exponentially in the future
     multiplierScaling is how quickly the multiplier grows
     not sure if this is needed, but I thought it should be included just in case
@@ -84,7 +84,6 @@ class flower {
 
     getFlowerAmount() {
         return this.amount;
-
     }
 
     setFlowerAmount(newAmount){
@@ -188,11 +187,50 @@ function increaseMultiplier(multiplier) {
     }
 }
 
+document.getElementById("saleInput").addEventListener("keydown", function(event) {saleMaker(event)});
+
+function showSaleDiv(e) {
+    e.stopPropagation();
+    document.getElementById("saleDiv").classList.remove("hidden");
+    document.getElementsByClassName("shadow")[0].classList.remove("hidden");
+    document.getElementById("saleInput").focus();
+}
+
+function saleMaker(e) {
+    const saleInput = document.getElementById("saleInput");
+    const saleDiv = document.getElementById("saleDiv");
+    const saleShadow = document.getElementsByClassName("shadow")[0];
+    if (e.key !== "Enter") {
+        return;
+    }
+    if (isNaN(saleInput.value)) {
+        return;
+    }
+    if (saleInput.value === "") {
+        saleDiv.classList.add("hidden");
+        saleShadow.classList.add("hidden");
+        return;
+    }
+    const flowerAmount = parseInt(saleInput.value);
+    if (flowerAmount > Dandelion.amount || flowerAmount < 0) {
+        return;
+    }
+    saleDiv.classList.add("hidden");
+    saleShadow.classList.add("hidden");
+
+    flowerAmountToMoney(flowerAmount);
+    saleInput.value = "";
+}
+
+function flowerAmountToMoney(flowerAmount) {
+    addMoney(flowerAmount);
+    Dandelion.addFlowerAmount(-flowerAmount);
+}
+
 // 1 to 1 conversion babyyyyy, plus a little extra
 function flowerToMoney() {
     addMoney(Dandelion.getFlowerAmount() * Dandelion.getBasePrice());
     Dandelion.setFlowerAmount(0);
-    console.log("$"+money);
 }
 
 // function setFlowers(amount) {
