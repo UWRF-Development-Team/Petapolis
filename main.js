@@ -122,24 +122,35 @@ function increaseMultiplier(multiplier) {
 
 document.getElementById("saleInput").addEventListener("keydown", function(event) {saleMaker(event)});
 
-function showSaleDiv() {
+function showSaleDiv(e) {
+    e.stopPropagation();
     document.getElementById("saleDiv").classList.remove("hidden");
+    document.getElementsByClassName("shadow")[0].classList.remove("hidden");
+    document.getElementById("saleInput").focus();
 }
 
 function saleMaker(e) {
     const saleInput = document.getElementById("saleInput");
     const saleDiv = document.getElementById("saleDiv");
+    const saleShadow = document.getElementsByClassName("shadow")[0];
     if (e.key !== "Enter") {
         return;
     }
     if (isNaN(saleInput.value)) {
         return;
     }
+    if (saleInput.value === "") {
+        saleDiv.classList.add("hidden");
+        saleShadow.classList.add("hidden");
+        return;
+    }
     const flowerAmount = parseInt(saleInput.value);
-    if (flowerAmount > flowers) {
+    if (flowerAmount > flowers || flowerAmount < 0) {
         return;
     }
     saleDiv.classList.add("hidden");
+    saleShadow.classList.add("hidden");
+
     flowerAmountToMoney(flowerAmount);
     saleInput.value = "";
 }

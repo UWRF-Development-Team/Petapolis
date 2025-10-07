@@ -8,7 +8,7 @@
     <body>
         <div id="main">
             <div class="shop">
-                <div class="content button" onclick="showSaleDiv()">
+                <div class="content button" onclick="showSaleDiv(e)">
                     <img alt="flower and money symbol with arrows" src="media/programmerArt/exchange.png">
                     <button onclick="flowerToMoney()">Sell All</button>
                 </div>
@@ -26,10 +26,11 @@
                     <h2>ascend</h2>
                 </div>
             </div>
+            <div class="shadow hidden"></div>
             <div class="salePopup hidden" id="saleDiv">
                 <label>
                     Enter the amount of flowers to sell.
-                    <input id="saleInput">
+                    <input id="saleInput" size="10">
                 </label>
             </div>
             <div class="display" id="display">

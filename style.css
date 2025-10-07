@@ -58,3 +58,27 @@ body{
 .hidden {
     visibility: hidden;
 }
+
+.salePopup {
+    position: fixed;
+    width: 10%;
+    background-color: pink;
+    left: 45%;
+    top: 50%;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.saleInput {
+    width: 10%;
+}
+
+.shadow {
+    position: fixed;
+    background-color: black;
+    opacity: 70%;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+}
