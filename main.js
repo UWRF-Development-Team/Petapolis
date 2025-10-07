@@ -84,7 +84,6 @@ class flower {
 
     getFlowerAmount() {
         return this.amount;
-
     }
 
     setFlowerAmount(newAmount){
@@ -213,7 +212,7 @@ function saleMaker(e) {
         return;
     }
     const flowerAmount = parseInt(saleInput.value);
-    if (flowerAmount > flowers || flowerAmount < 0) {
+    if (flowerAmount > Dandelion.amount || flowerAmount < 0) {
         return;
     }
     saleDiv.classList.add("hidden");
@@ -225,7 +224,7 @@ function saleMaker(e) {
 
 function flowerAmountToMoney(flowerAmount) {
     addMoney(flowerAmount);
-    addFlowers(-flowerAmount);
+    Dandelion.addFlowerAmount(-flowerAmount);
 }
 
 // 1 to 1 conversion babyyyyy, plus a little extra
