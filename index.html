@@ -8,6 +8,11 @@
     </head>
     <body>
         <div id="main">
+            <div class="settings">
+                <div id="autoconvert" class="content button grey" onclick="autoConvert()">
+                    <h3>Auto Converter</h3>
+                </div>
+            </div>
             <div class="shop">
                 <div class="content button" onclick="flowerToMoney()">
                     <img alt="flower and money symbol with arrows" src="media/programmerArt/exchange.png">
@@ -28,7 +33,7 @@
             </div>
             <div class="display" id="display">
                 <p class="display_text" id="flower_display">Flowers: 0</p>
-                <p class="display_text" id="dollar_display">Dollars: 0</p>
+                <p class="display_text" id="dollar_display">Money: 0</p>
             </div>
         </div>
         <div class="box" onclick="trowel.harvest()"></div>

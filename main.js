@@ -113,6 +113,21 @@ let Dandelion = new flower("Dandelion", 0, 12 );
 let gardener = new Producer(50, 50, 1.2, 1.2, 1, 1, 0);
 let prestigeCount = 0;
 
+// maybe we could get a list of settings info.
+// for now its just this one thing but once/if we have others, I think it'd be a good idea
+let autoConverterID;
+
+// checks if the loop is going.
+// if not then the loop is started, its id is saved, and the button is turned pink
+// if it is going then the loop is turned off with the id saved before and the button is turned grey
+function autoConvert() {
+   if(!document.querySelector("#autoconvert").classList.toggle("grey")) {
+       autoConverterID = window.setInterval(() => flowerToMoney(), 1000);
+   } else {
+       window.clearInterval(autoConverterID);
+   }
+}
+
 // takes the name of the producer and changes the cost and count in the html file
 function refreshShop(producer) {
     switch (producer) {
@@ -221,8 +236,10 @@ function addMoney(amount) {
 //resets game state
 function prestige() {
     console.log(Dandelion.getFlowerAmount());
-    if (Dandelion.getFlowerAmount() < 1000000){
+    if (Dandelion.getFlowerAmount() < 1000000) {
         alert("You can't prestige!! Reach 1,000,000 flowers to prestige.");
+        return;
+    }
     if (money < 1000000){
         document.querySelector("#prestigeBuy").classList.add('shake');
         document.querySelector("#prestigeBuy").addEventListener('animationend', () => {
@@ -238,4 +255,5 @@ function prestige() {
     refreshShop('trowel');
     prestigeCount += 1;
     alert("You are now prestige " + prestigeCount + "!");
+
 }
