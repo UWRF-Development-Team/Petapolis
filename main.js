@@ -221,21 +221,23 @@ function addMoney(amount) {
 //resets game state
 function prestige() {
     console.log(Dandelion.getFlowerAmount());
-    if (Dandelion.getFlowerAmount() < 1000000){
+    if (Dandelion.getFlowerAmount() < 1000000) {
         alert("You can't prestige!! Reach 1,000,000 flowers to prestige.");
-    if (money < 1000000){
-        document.querySelector("#prestigeBuy").classList.add('shake');
-        document.querySelector("#prestigeBuy").addEventListener('animationend', () => {
-            document.querySelector("#prestigeBuy").classList.remove('shake')
-        }, { once: true });
-        return;
+        if (money < 1000000) {
+            document.querySelector("#prestigeBuy").classList.add('shake');
+            document.querySelector("#prestigeBuy").addEventListener('animationend', () => {
+                document.querySelector("#prestigeBuy").classList.remove('shake')
+            }, {once: true});
+            return;
+        }
+        setMoney(0);
+        Dandelion.setFlowerAmount(0);
+        gardener = new Producer(50, 50, 1.2, 1.2, 1, 1, 0);
+        trowel = new Producer(50, 10000000000, 1.2, 1.2, 1, 1, 2);
+        refreshShop('gardener');
+        refreshShop('trowel');
+        prestigeCount += 1;
+        alert("You are now prestige " + prestigeCount + "!");
     }
-    setMoney(0);
-    Dandelion.setFlowerAmount(0);
-    gardener = new Producer(50, 50, 1.2, 1.2, 1, 1, 0);
-    trowel = new Producer(50, 10000000000, 1.2, 1.2, 1, 1, 2);
-    refreshShop('gardener');
-    refreshShop('trowel');
-    prestigeCount += 1;
-    alert("You are now prestige " + prestigeCount + "!");
+
 }
