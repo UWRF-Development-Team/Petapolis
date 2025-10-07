@@ -68,8 +68,8 @@ let money = 0;
 let flowers = 0;
 let gardener = new Producer(50, 50, 1.2, 1.2, 1, 1, 0);
 let prestigeCount = 0;
-let latitude = 0;
-let longitude = 0;
+let latitude;
+let longitude;
 APIKey = getAPIKey();
 let currentWeather;
 getCurrentWeather();
@@ -145,14 +145,12 @@ function prestige() {
 
 async function getCurrentWeather() {
     getCurrentLocation();
-    console.log("Latitude: " + latitude +
-                       "\nLongitude: " + longitude)
 
     const params = new URLSearchParams({
     key: APIKey,
     q: `${latitude},${longitude}`
     });
-    const response = await fetch(`http://api.weatherapi.com/v1/current.json?${params}`)
+    let response = await fetch(`http://api.weatherapi.com/v1/current.json?${params}`)
     .then(response = response.json())
     .then(data => {
     console.log(data.condition);
@@ -165,17 +163,17 @@ async function getCurrentWeather() {
 
 function getCurrentLocation(){
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(success, error);
+      navigator.geolocation.getCurrentPosition(success, error);
   } else {
-    alert("Geolocation is not supported by this browser.");
+        alert("Geolocation is not supported by this browser.");
+        latitude = 44.8523405;
+        longitude = -92.6233659;
   }
 }
 
 function success(position){
     latitude = position.coords.latitude;
     longitude = position.coords.longitude;
-//    console.log("Latitude: " + latitude +
-//                   "\nLongitude: " + longitude)
 }
 
 function error() {
