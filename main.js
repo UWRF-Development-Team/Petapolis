@@ -112,6 +112,8 @@ let trowel = new Producer(50, 10000000000, 1.2, 1.2, 1, 1, 1);
 let Dandelion = new flower("Dandelion", 0, 12 );
 let gardener = new Producer(50, 50, 1.2, 1.2, 1, 1, 0);
 let prestigeCount = 0;
+let isGoing = false
+let intervalbuffer;
 
 // takes the name of the producer and changes the cost and count in the html file
 function refreshShop(producer) {
@@ -193,6 +195,17 @@ function flowerToMoney() {
     addMoney(Dandelion.getFlowerAmount() * Dandelion.getBasePrice());
     Dandelion.setFlowerAmount(0);
     console.log("$"+money);
+}
+function automonzy(){
+    if (!isGoing) {
+        intervalbuffer = setInterval(() => {
+            (flowerToMoney());
+        }, 1000);
+        isGoing = true
+    } else {
+        clearInterval(intervalbuffer)
+        isGoing = false
+    }
 }
 
 // function setFlowers(amount) {
