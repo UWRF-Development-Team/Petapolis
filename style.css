@@ -2,6 +2,7 @@ body{
     background-image: url("media/programmerArt/background.png");
     background-position:  top;
     background-size: cover;
+    user-select: none;
 }
 
 .content {
@@ -9,6 +10,18 @@ body{
     background-color: rgb(255, 164, 225);
     border-radius: 5%;
     box-sizing: border-box;
+}
+
+.settings {
+    position: fixed;
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: stretch;
+    gap: 5%;
+    width: 10%;
+    text-align: center;
 }
 
 .shop {
