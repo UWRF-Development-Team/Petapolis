@@ -121,7 +121,7 @@ let autoConverterID;
 // if it is going then the loop is turned off with the id saved before and the button is turned grey
 function autoConvert() {
    if(!document.querySelector("#autoconvert").classList.toggle("grey")) {
-       autoConverterID = window.setInterval(() => flowerToMoney(), 1000);
+       autoConverterID = window.setInterval(() => flowerToMoney(false), 1000);
    } else {
        window.clearInterval(autoConverterID);
    }
@@ -243,8 +243,9 @@ function flowerAmountToMoney(flowerAmount) {
 }
 
 // 1 to 1 conversion babyyyyy, plus a little extra
-function flowerToMoney(event) {
-    event.stopPropagation();
+function flowerToMoney(fromOnClick, event) {
+    if (fromOnClick)
+        event.stopPropagation();
     addMoney(Dandelion.getFlowerAmount() * Dandelion.getBasePrice());
     Dandelion.setFlowerAmount(0);
 }
