@@ -202,7 +202,10 @@ function increaseMultiplier(multiplier) {
     }
 }
 
-document.getElementById("saleInput").addEventListener("keydown", function(event) {saleMaker(event)});
+document.getElementById("saleInput").addEventListener("keydown", function(event) {
+    saleMaker(event)
+});
+
 
 function showSaleDiv(e) {
     e.stopPropagation();
@@ -215,6 +218,9 @@ function saleMaker(e) {
     const saleInput = document.getElementById("saleInput");
     const saleDiv = document.getElementById("saleDiv");
     const saleShadow = document.getElementsByClassName("shadow")[0];
+    if (e.key === "Escape") {
+        hideSale(saleDiv, saleInput, saleShadow);
+    }
     if (e.key !== "Enter") {
         return;
     }
@@ -222,8 +228,7 @@ function saleMaker(e) {
         return;
     }
     if (saleInput.value === "") {
-        saleDiv.classList.add("hidden");
-        saleShadow.classList.add("hidden");
+        hideSale(saleDiv, saleInput, saleShadow);
         return;
     }
     const flowerAmount = parseInt(saleInput.value);
@@ -234,7 +239,12 @@ function saleMaker(e) {
     saleShadow.classList.add("hidden");
 
     flowerAmountToMoney(flowerAmount);
-    saleInput.value = "";
+}
+
+function hideSale(div, input, shadow) {
+    div.classList.add("hidden");
+    shadow.classList.add("hidden");
+    input.value = "";
 }
 
 function flowerAmountToMoney(flowerAmount) {
