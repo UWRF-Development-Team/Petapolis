@@ -3,7 +3,6 @@
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="style.css">
-        <script src="main.js"></script>
         <title>Title</title>
     </head>
     <body>
@@ -13,9 +12,16 @@
                     <button class="toIndexTutorialBtn">Tutorial</button>
                 </a>
             </div>
+            <div class="settings">
+                <div id="autoconvert" class="content button grey" onclick="autoConvert()">
+                    <h3>Auto Converter</h3>
+                </div>
+            </div>
             <div class="shop">
-                <div class="content button" onclick="flowerToMoney()">
+                <!-- TODO fix deprecated doodad -->
+                <div class="content button" onclick="showSaleDiv(event)">
                     <img alt="flower and money symbol with arrows" src="media/programmerArt/exchange.png">
+                    <button onclick="flowerToMoney()">Sell All</button>
                 </div>
                 <div class="content button grey" onclick="buy('trowel')" id="trowelBuy">
                     <div id="trowelCost">$50</div>
@@ -31,11 +37,19 @@
                     <h2>ascend</h2>
                 </div>
             </div>
+            <div class="shadow hidden"></div>
+            <div class="salePopup hidden" id="saleDiv">
+                <label>
+                    Enter the amount of flowers to sell.
+                    <input id="saleInput" size="10">
+                </label>
+            </div>
             <div class="display" id="display">
                 <p class="display_text" id="flower_display">Flowers: 0</p>
-                <p class="display_text" id="dollar_display">Dollars: 0</p>
+                <p class="display_text" id="dollar_display">Money: 0</p>
             </div>
         </div>
         <div class="box" onclick="trowel.harvest()"></div>
     </body>
+    <script src="main.js"></script>
 </html>

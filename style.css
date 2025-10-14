@@ -2,6 +2,7 @@ body{
     background-image: url("media/programmerArt/background.png");
     background-position:  top;
     background-size: cover;
+    user-select: none;
 }
 
 .content {
@@ -24,6 +25,18 @@ body{
     background-color: rgb(255, 164, 225);
     width: 55%;
     margin: auto;
+}
+
+.settings {
+    position: fixed;
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: stretch;
+    gap: 5%;
+    width: 10%;
+    text-align: center;
 }
 
 .shop {
@@ -68,6 +81,34 @@ body{
     padding: 5%;
     cursor: pointer;
     background: red;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.salePopup {
+    position: fixed;
+    width: 10%;
+    background-color: pink;
+    left: 45%;
+    top: 50%;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.saleInput {
+    width: 10%;
+}
+
+.shadow {
+    position: fixed;
+    background-color: black;
+    opacity: 70%;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
 }
 
 .grey {
