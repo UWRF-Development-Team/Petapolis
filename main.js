@@ -121,7 +121,7 @@ let autoConverterID;
 // if it is going then the loop is turned off with the id saved before and the button is turned grey
 function autoConvert() {
    if(!document.querySelector("#autoconvert").classList.toggle("grey")) {
-       autoConverterID = window.setInterval(() => flowerToMoney(), 1000);
+       autoConverterID = window.setInterval(() => flowerToMoney(false), 1000);
    } else {
        window.clearInterval(autoConverterID);
    }
@@ -238,12 +238,14 @@ function saleMaker(e) {
 }
 
 function flowerAmountToMoney(flowerAmount) {
-    addMoney(flowerAmount);
+    addMoney(flowerAmount * Dandelion.getBasePrice());
     Dandelion.addFlowerAmount(-flowerAmount);
 }
 
 // 1 to 1 conversion babyyyyy, plus a little extra
-function flowerToMoney() {
+function flowerToMoney(fromOnClick, event) {
+    if (fromOnClick)
+        event.stopPropagation();
     addMoney(Dandelion.getFlowerAmount() * Dandelion.getBasePrice());
     Dandelion.setFlowerAmount(0);
 }
@@ -275,7 +277,6 @@ function addMoney(amount) {
 function prestige() {
     console.log(Dandelion.getFlowerAmount());
     if (Dandelion.getFlowerAmount() < 1000000) {
-        alert("You can't prestige!! Reach 1,000,000 flowers to prestige.");
         if (money < 1000000) {
             document.querySelector("#prestigeBuy").classList.add('shake');
             document.querySelector("#prestigeBuy").addEventListener('animationend', () => {

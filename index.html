@@ -21,7 +21,7 @@
                 <!-- TODO fix deprecated doodad -->
                 <div class="content button" onclick="showSaleDiv(event)">
                     <img alt="flower and money symbol with arrows" src="media/programmerArt/exchange.png">
-                    <button onclick="flowerToMoney()">Sell All</button>
+                    <button id="sellallbutton" onclick="flowerToMoney(true, event)">Sell All</button>
                 </div>
                 <div class="content button grey" onclick="buy('trowel')" id="trowelBuy">
                     <div id="trowelCost">$50</div>
@@ -34,6 +34,7 @@
                     <div id="gardenerCount">(0)</div>
                 </div>
                 <div class="content button grey" onclick="prestige()" id="prestigeBuy">
+                    <div id="prestigeCost">$1,000,000</div>
                     <h2>ascend</h2>
                 </div>
             </div>
