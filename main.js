@@ -238,7 +238,7 @@ function saleMaker(e) {
 }
 
 function flowerAmountToMoney(flowerAmount) {
-    addMoney(flowerAmount);
+    addMoney(flowerAmount * Dandelion.getBasePrice());
     Dandelion.addFlowerAmount(-flowerAmount);
 }
 
