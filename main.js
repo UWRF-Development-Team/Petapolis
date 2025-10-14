@@ -228,7 +228,8 @@ function flowerAmountToMoney(flowerAmount) {
 }
 
 // 1 to 1 conversion babyyyyy, plus a little extra
-function flowerToMoney() {
+function flowerToMoney(event) {
+    event.stopPropagation();
     addMoney(Dandelion.getFlowerAmount() * Dandelion.getBasePrice());
     Dandelion.setFlowerAmount(0);
 }
