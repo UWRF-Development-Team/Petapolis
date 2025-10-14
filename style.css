@@ -29,14 +29,27 @@ body{
 
 .settings {
     position: fixed;
-    bottom: 0;
+    top: 0;
     right: 0;
     display: flex;
-    justify-content: space-around;
-    align-items: stretch;
-    gap: 5%;
-    width: 10%;
-    text-align: center;
+    width: 3.5%;
+    padding: 5px;
+    border-radius: 10%;
+}
+
+#settingsMenu {
+    visibility: hidden;
+    position: fixed;
+    top: 10%;
+    left: 25%;
+    width: 50%;
+    height: 75%;
+    background-color: darkgray;
+
+    display: flex;
+    justify-content: left;
+    align-content: space-around;
+    overflow: scroll;
 }
 
 .shop {

@@ -271,6 +271,18 @@ function addMoney(amount) {
     document.getElementById("dollar_display").innerHTML = "Money: " + money;
 }
 
+function settingsPopup() {
+    let settings = document.getElementById("settingsMenu")
+    if (settings.style.visibility === "visible") {
+        settings.style.visibility = "hidden";
+    } else {
+        settings.style.visibility = "visible";
+    }
+
+}
+
+
+
 //resets game state
 function prestige() {
     console.log(Dandelion.getFlowerAmount());
