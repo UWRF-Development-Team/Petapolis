@@ -27,7 +27,7 @@ body{
     margin: auto;
 }
 
-.settings {
+.settingsIcon {
     position: fixed;
     top: 0;
     right: 0;
@@ -47,9 +47,17 @@ body{
     background-color: darkgray;
 
     display: flex;
-    justify-content: left;
-    align-content: space-around;
+    gap: 5%;
+    padding: 5px;
     overflow: scroll;
+}
+
+.setting {
+    max-height:10%;
+    display: flex;
+    flex-flow: row;
+    align-items: stretch;
+    cursor: pointer;
 }
 
 .shop {

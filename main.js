@@ -278,10 +278,7 @@ function settingsPopup() {
     } else {
         settings.style.visibility = "visible";
     }
-
 }
-
-
 
 //resets game state
 function prestige() {
