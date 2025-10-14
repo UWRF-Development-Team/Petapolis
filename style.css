@@ -18,7 +18,13 @@ body{
     background: rgb(255, 164, 225);
 }
 
-
+#tutorialContainer {
+    text-align: center;
+    display: block;
+    background-color: rgb(255, 164, 225);
+    width: 55%;
+    margin: auto;
+}
 
 .shop {
     position: fixed;
