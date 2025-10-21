@@ -332,7 +332,7 @@ function restoreValues() {
     gardener.buyCost = sessionStorage.gardenerBuyCost;
     refreshShop('trowel');
     refreshShop('gardener');
-    if(gardener.amount !== 0) {
+    if(gardener.amount != 0) {
         window.setInterval(() => gardener.harvest(), 1000);
     }
 }
