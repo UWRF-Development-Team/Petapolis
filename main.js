@@ -111,10 +111,16 @@ let trowel = new Producer(50, 10000000000, 1.2, 1.2, 1, 1, 1);
 let Dandelion = new flower("Dandelion", 0, 12 );
 let gardener = new Producer(50, 50, 1.2, 1.2, 1, 1, 0);
 let prestigeCount = 0;
+let urlParams = new URLSearchParams(window.location.search)
 
 // maybe we could get a list of settings info.
 // for now its just this one thing but once/if we have others, I think it'd be a good idea
 let autoConverterID;
+
+if(urlParams.has('back')) {
+    restoreValues();
+}
+
 
 // checks if the loop is going.
 // if not then the loop is started, its id is saved, and the button is turned pink
