@@ -305,3 +305,13 @@ function prestige() {
     }
 
 }
+
+function storeValues(){
+    sessionStorage.money = money;
+    sessionStorage.flowers = Dandelion.getFlowerAmount();
+}
+
+function restoreValues() {
+    money = Number(sessionStorage.money);
+    Dandelion.setFlowerAmount(Number(sessionStorage.flowers));
+}
