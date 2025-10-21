@@ -203,7 +203,7 @@ function increaseMultiplier(multiplier) {
     }
 }
 
-$("#saleInput").addEventListener("keydown", function(event) {
+$("#saleInput").on("keydown", function(event) {
     saleMaker(event)
 });
 
@@ -211,14 +211,14 @@ $("#saleInput").addEventListener("keydown", function(event) {
 function showSaleDiv(e) {
     e.stopPropagation();
     $("#saleDiv").removeClass("hidden");
-    $(".shadow")[0].removeClass("hidden");
+    $(".shadow:first").removeClass("hidden");
     $("#saleInput").focus();
 }
 
 function saleMaker(e) {
     const saleInput = $("#saleInput");
     const saleDiv = $("#saleDiv");
-    const saleShadow = $(".shadow")[0];
+    const saleShadow = $(".shadow:first");
     if (e.key === "Escape") {
         hideSale(saleDiv, saleInput, saleShadow);
     }
