@@ -314,10 +314,25 @@ function prestige() {
 
 function storeValues(){
     sessionStorage.money = money;
+    sessionStorage.prestigeCount = prestigeCount;
     sessionStorage.flowers = Dandelion.getFlowerAmount();
+    sessionStorage.trowelAmount = trowel.getAmount();
+    sessionStorage.trowelBuyCost = trowel.getBuyCost();
+    sessionStorage.gardenerAmount = gardener.getAmount();
+    sessionStorage.gardenerBuyCost = gardener.getBuyCost();
 }
 
 function restoreValues() {
-    money = Number(sessionStorage.money);
+    setMoney(Number(sessionStorage.money));
+    prestigeCount = Number(sessionStorage.prestigeCount);
     Dandelion.setFlowerAmount(Number(sessionStorage.flowers));
+    trowel.amount = sessionStorage.trowelAmount;
+    trowel.buyCost = sessionStorage.trowelBuyCost;
+    gardener.amount = sessionStorage.gardenerAmount;
+    gardener.buyCost = sessionStorage.gardenerBuyCost;
+    refreshShop('trowel');
+    refreshShop('gardener');
+    if(gardener.amount !== 0) {
+        window.setInterval(() => gardener.harvest(), 1000);
+    }
 }
