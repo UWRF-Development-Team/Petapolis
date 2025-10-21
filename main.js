@@ -120,7 +120,7 @@ let autoConverterID;
 // if not then the loop is started, its id is saved, and the button is turned pink
 // if it is going then the loop is turned off with the id saved before and the button is turned grey
 function autoConvert() {
-   if(!document.querySelector("#autoconvert").classList.toggle("grey")) {
+   if(!$("#autoconvert").toggleClass("grey")) {
        autoConverterID = window.setInterval(() => flowerToMoney(false), 1000);
    } else {
        window.clearInterval(autoConverterID);
