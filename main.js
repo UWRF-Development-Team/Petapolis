@@ -9,7 +9,7 @@ class Producer {
     baseProduction is how much the producer produces per producer before the multiplier
     */
 
-    constructor(buyCost, multiplierCost, costScaling, multiplierScaling, baseProduction, multiplier, amount) {
+    constructor(buyCost, multiplierCost, costScaling, multiplierScaling, baseProduction, multiplier, amount, name) {
         this.buyCost = buyCost;
         this.multiplierCost = multiplierCost;
         this.costScaling = costScaling;
@@ -17,6 +17,7 @@ class Producer {
         this.baseProduction = baseProduction;
         this.multiplier = multiplier;
         this.amount = amount;
+        this.name = name;
     }
 
     // used to buy a new producer
@@ -61,6 +62,14 @@ class Producer {
     // increases flowers based on # of producers, their base production, and the multiplier
     harvest() {
         Dandelion.addFlowerAmount(Math.round(this.amount * this.baseProduction * this.multiplier));
+
+    }
+
+    checkGrey() {
+        if (money < this.getBuyCost())
+            $(`#${this.name}Buy`).addClass("grey");
+        else
+            $(`#${this.name}Buy`).removeClass("grey");
     }
 }
 
@@ -88,12 +97,12 @@ class flower {
 
     setFlowerAmount(newAmount){
         this.amount = newAmount
-        document.getElementById("flower_display").innerHTML = "Flowers: " + this.amount;
+        $("flower_display").html("Flowers: " + this.amount);
     }
 
     addFlowerAmount(addAmount){
         this.amount += addAmount;
-        document.getElementById("flower_display").innerHTML = "Flowers: " + this.amount;
+        $("#flower_display").html("Flowers: " + this.amount);
     }
 
     getFlowerName() {
@@ -107,9 +116,9 @@ class flower {
 }
 
 let money = 0;
-let trowel = new Producer(50, 10000000000, 1.2, 1.2, 1, 1, 1);
+let trowel = new Producer(50, 10000000000, 1.2, 1.2, 1, 1, 1, "trowel");
 let Dandelion = new flower("Dandelion", 0, 12 );
-let gardener = new Producer(50, 50, 1.2, 1.2, 1, 1, 0);
+let gardener = new Producer(50, 50, 1.2, 1.2, 1, 1, 0, "gardener");
 let prestigeCount = 0;
 
 // maybe we could get a list of settings info.
@@ -131,32 +140,24 @@ function autoConvert() {
 function refreshShop(producer) {
     switch (producer) {
         case 'gardener':
-            document.querySelector("#gardenerBuy > #gardenerCount").innerHTML = `(${gardener.getAmount()})`;
-            document.querySelector("#gardenerBuy > #gardenerCost").innerHTML = '$'+`${gardener.getBuyCost()}`;
+            $("#gardenerBuy > #gardenerCount").html(`(${gardener.getAmount()})`);
+            $("#gardenerBuy > #gardenerCost").html('$'+`${gardener.getBuyCost()}`);
             break;
         case 'trowel':
-            document.querySelector("#trowelBuy > #trowelCount").innerHTML = `(${trowel.getAmount()})`;
-            document.querySelector("#trowelBuy > #trowelCost").innerHTML = '$'+`${trowel.getBuyCost()}`;
+            $("#trowelBuy > #trowelCount").html(`(${trowel.getAmount()})`);
+            $("#trowelBuy > #trowelCost").html('$'+`${trowel.getBuyCost()}`);
             break;
     }
 }
 
 function checkCosts() {
-    // TODO refactor All of this with oop because oh my god this is maybe my worst code ever
-    if (money < trowel.getBuyCost())
-        document.querySelector("#trowelBuy").classList.add("grey");
-    else
-        document.querySelector("#trowelBuy").classList.remove("grey");
-
-    if (money < gardener.getBuyCost())
-        document.querySelector("#gardenerBuy").classList.add("grey");
-    else
-        document.querySelector("#gardenerBuy").classList.remove("grey");
+    trowel.checkGrey();
+    gardener.checkGrey();
 
     if (money < 1000000)
-        document.querySelector("#prestigeBuy").classList.add("grey");
+        $("#prestigeBuy").addClass("grey");
     else
-        document.querySelector("#prestigeBuy").classList.remove("grey");
+        $("#prestigeBuy").removeClass("grey");
 }
 
 // takes the name of the producer and buys one
@@ -170,9 +171,9 @@ function buy(producer) {
                 refreshShop('gardener');
             } else {
                 // TODO refactor Later cuz what the hell was i thinking here
-                document.querySelector("#gardenerBuy").classList.add('shake');
-                document.querySelector("#gardenerBuy").addEventListener('animationend', () => {
-                    document.querySelector("#gardenerBuy").classList.remove('shake')
+                $("#gardenerBuy").addClass('shake');
+                $.addEventListener('animationend', () => {
+                    $("#gardenerBuy").removeClass('shake')
                 }, { once: true });
             }
             break;
@@ -180,9 +181,9 @@ function buy(producer) {
             if (trowel.buy()) {
                 refreshShop('trowel');
             } else {
-                document.querySelector("#trowelBuy").classList.add('shake');
-                document.querySelector("#trowelBuy").addEventListener('animationend', () => {
-                    document.querySelector("#trowelBuy").classList.remove('shake')
+                $("#trowelBuy").addClass('shake');
+                $.addEventListener('animationend', () => {
+                    $("#trowelBuy").removeClass('shake')
                 }, { once: true });
             }
             break;
@@ -202,22 +203,22 @@ function increaseMultiplier(multiplier) {
     }
 }
 
-document.getElementById("saleInput").addEventListener("keydown", function(event) {
+$("#saleInput").addEventListener("keydown", function(event) {
     saleMaker(event)
 });
 
 
 function showSaleDiv(e) {
     e.stopPropagation();
-    document.getElementById("saleDiv").classList.remove("hidden");
-    document.getElementsByClassName("shadow")[0].classList.remove("hidden");
-    document.getElementById("saleInput").focus();
+    $("#saleDiv").removeClass("hidden");
+    $(".shadow")[0].removeClass("hidden");
+    $("#saleInput").focus();
 }
 
 function saleMaker(e) {
-    const saleInput = document.getElementById("saleInput");
-    const saleDiv = document.getElementById("saleDiv");
-    const saleShadow = document.getElementsByClassName("shadow")[0];
+    const saleInput = $("#saleInput");
+    const saleDiv = $("#saleDiv");
+    const saleShadow = $(".shadow")[0];
     if (e.key === "Escape") {
         hideSale(saleDiv, saleInput, saleShadow);
     }
@@ -235,15 +236,15 @@ function saleMaker(e) {
     if (flowerAmount > Dandelion.amount || flowerAmount < 0) {
         return;
     }
-    saleDiv.classList.add("hidden");
-    saleShadow.classList.add("hidden");
+    saleDiv.addClass("hidden");
+    saleShadow.addClass("hidden");
 
     flowerAmountToMoney(flowerAmount);
 }
 
 function hideSale(div, input, shadow) {
-    div.classList.add("hidden");
-    shadow.classList.add("hidden");
+    div.addClass("hidden");
+    shadow.addClass("hidden");
     input.value = "";
 }
 
@@ -273,14 +274,14 @@ function flowerToMoney(fromOnClick, event) {
 
 function setMoney(amount) {
     money = amount;
-    document.getElementById("dollar_display").innerHTML = "Money: " + money;
+    $("#dollar_display").html("Money: " + money);
 }
 
 //increases money count by a given value
 function addMoney(amount) {
     money += amount;
     checkCosts();
-    document.getElementById("dollar_display").innerHTML = "Money: " + money;
+    $("#dollar_display").html("Money: " + money);
 }
 
 //resets game state
@@ -288,9 +289,9 @@ function prestige() {
     console.log(Dandelion.getFlowerAmount());
     if (Dandelion.getFlowerAmount() < 1000000) {
         if (money < 1000000) {
-            document.querySelector("#prestigeBuy").classList.add('shake');
-            document.querySelector("#prestigeBuy").addEventListener('animationend', () => {
-                document.querySelector("#prestigeBuy").classList.remove('shake')
+            $("#prestigeBuy").addClass('shake');
+            $.addEventListener('animationend', () => {
+                $("#prestigeBuy").removeClass('shake')
             }, {once: true});
             return;
         }
