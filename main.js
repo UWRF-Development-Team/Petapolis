@@ -172,7 +172,7 @@ function buy(producer) {
             } else {
                 // TODO refactor Later cuz what the hell was i thinking here
                 $("#gardenerBuy").addClass('shake');
-                $.addEventListener('animationend', () => {
+                $.on('animationend', () => {
                     $("#gardenerBuy").removeClass('shake')
                 }, { once: true });
             }
@@ -182,7 +182,7 @@ function buy(producer) {
                 refreshShop('trowel');
             } else {
                 $("#trowelBuy").addClass('shake');
-                $.addEventListener('animationend', () => {
+                $.on('animationend', () => {
                     $("#trowelBuy").removeClass('shake')
                 }, { once: true });
             }
@@ -290,7 +290,7 @@ function prestige() {
     if (Dandelion.getFlowerAmount() < 1000000) {
         if (money < 1000000) {
             $("#prestigeBuy").addClass('shake');
-            $.addEventListener('animationend', () => {
+            $.on('animationend', () => {
                 $("#prestigeBuy").removeClass('shake')
             }, {once: true});
             return;
