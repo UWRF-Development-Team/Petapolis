@@ -97,7 +97,7 @@ class flower {
 
     setFlowerAmount(newAmount){
         this.amount = newAmount
-        $("flower_display").html("Flowers: " + this.amount);
+        $("#flower_display").html("Flowers: " + this.amount);
     }
 
     addFlowerAmount(addAmount){
@@ -225,14 +225,14 @@ function saleMaker(e) {
     if (e.key !== "Enter") {
         return;
     }
-    if (isNaN(saleInput.value)) {
+    if (isNaN(saleInput.val())) {
         return;
     }
-    if (saleInput.value === "") {
+    if (saleInput.val() === "") {
         hideSale(saleDiv, saleInput, saleShadow);
         return;
     }
-    const flowerAmount = parseInt(saleInput.value);
+    const flowerAmount = parseInt(saleInput.val());
     if (flowerAmount > Dandelion.amount || flowerAmount < 0) {
         return;
     }
@@ -245,7 +245,8 @@ function saleMaker(e) {
 function hideSale(div, input, shadow) {
     div.addClass("hidden");
     shadow.addClass("hidden");
-    input.value = "";
+    //todo fix this not actually clearing it for some reason
+    input.val("");
 }
 
 function flowerAmountToMoney(flowerAmount) {
