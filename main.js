@@ -120,10 +120,16 @@ let trowel = new Producer(50, 10000000000, 1.2, 1.2, 1, 1, 1, "trowel");
 let Dandelion = new flower("Dandelion", 0, 12 );
 let gardener = new Producer(50, 50, 1.2, 1.2, 1, 1, 0, "gardener");
 let prestigeCount = 0;
+let urlParams = new URLSearchParams(window.location.search)
 
 // maybe we could get a list of settings info.
 // for now its just this one thing but once/if we have others, I think it'd be a good idea
 let autoConverterID;
+
+if(urlParams.has('back')) {
+    restoreValues();
+}
+
 
 // checks if the loop is going.
 // if not then the loop is started, its id is saved, and the button is turned pink
@@ -305,4 +311,29 @@ function prestige() {
         alert("You are now prestige " + prestigeCount + "!");
     }
 
+}
+
+function storeValues(){
+    sessionStorage.money = money;
+    sessionStorage.prestigeCount = prestigeCount;
+    sessionStorage.flowers = Dandelion.getFlowerAmount();
+    sessionStorage.trowelAmount = trowel.getAmount();
+    sessionStorage.trowelBuyCost = trowel.getBuyCost();
+    sessionStorage.gardenerAmount = gardener.getAmount();
+    sessionStorage.gardenerBuyCost = gardener.getBuyCost();
+}
+
+function restoreValues() {
+    setMoney(Number(sessionStorage.money));
+    prestigeCount = Number(sessionStorage.prestigeCount);
+    Dandelion.setFlowerAmount(Number(sessionStorage.flowers));
+    trowel.amount = sessionStorage.trowelAmount;
+    trowel.buyCost = sessionStorage.trowelBuyCost;
+    gardener.amount = sessionStorage.gardenerAmount;
+    gardener.buyCost = sessionStorage.gardenerBuyCost;
+    refreshShop('trowel');
+    refreshShop('gardener');
+    if(gardener.amount != 0) {
+        window.setInterval(() => gardener.harvest(), 1000);
+    }
 }
