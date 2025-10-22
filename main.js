@@ -129,7 +129,8 @@ let autoConverterID;
 // if not then the loop is started, its id is saved, and the button is turned pink
 // if it is going then the loop is turned off with the id saved before and the button is turned grey
 function autoConvert() {
-   if(!$("#autoconvert").toggleClass("grey")) {
+    $("#autoconvert").toggleClass("grey")
+   if(!$("#autoconvert").hasClass("grey")) {
        autoConverterID = window.setInterval(() => flowerToMoney(false), 1000);
    } else {
        window.clearInterval(autoConverterID);
@@ -172,9 +173,9 @@ function buy(producer) {
             } else {
                 // TODO refactor Later cuz what the hell was i thinking here
                 $("#gardenerBuy").addClass('shake');
-                $.on('animationend', () => {
+                $("#gardenerBuy").one('animationend', () => {
                     $("#gardenerBuy").removeClass('shake')
-                }, { once: true });
+                });
             }
             break;
         case 'trowel':
@@ -182,9 +183,9 @@ function buy(producer) {
                 refreshShop('trowel');
             } else {
                 $("#trowelBuy").addClass('shake');
-                $.on('animationend', () => {
+                $("#trowelBuy").one('animationend', () => {
                     $("#trowelBuy").removeClass('shake')
-                }, { once: true });
+                });
             }
             break;
     }
@@ -236,8 +237,7 @@ function saleMaker(e) {
     if (flowerAmount > Dandelion.amount || flowerAmount < 0) {
         return;
     }
-    saleDiv.addClass("hidden");
-    saleShadow.addClass("hidden");
+    hideSale(saleDiv, saleInput, saleShadow);
 
     flowerAmountToMoney(flowerAmount);
 }
@@ -245,8 +245,7 @@ function saleMaker(e) {
 function hideSale(div, input, shadow) {
     div.addClass("hidden");
     shadow.addClass("hidden");
-    //todo fix this not actually clearing it for some reason
-    input.val("");
+    input.val('')
 }
 
 function flowerAmountToMoney(flowerAmount) {
