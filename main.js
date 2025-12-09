@@ -147,8 +147,9 @@ function autoConvert() {
 function refreshShop(producer) {
     switch (producer) {
         case 'gardener':
-            $("#gardenerBuy > #gardenerCount").html(`(${gardener.getAmount()})`);
-            $("#gardenerBuy > #gardenerCost").html('$'+`${gardener.getBuyCost()}`);
+            console.log("Hello");
+            $("#gardenerCount").html(`(${gardener.getAmount()})`);
+            $("#gardenerCost").html('$'+`${gardener.getBuyCost()}`);
             break;
         case 'trowel':
             $("#trowelBuy > #trowelCount").html(`(${trowel.getAmount()})`);
@@ -292,15 +293,14 @@ function addMoney(amount) {
 
 //resets game state
 function prestige() {
-    console.log(Dandelion.getFlowerAmount());
-    if (Dandelion.getFlowerAmount() < 1000000) {
-        if (money < 1000000) {
-            $("#prestigeBuy").addClass('shake');
-            $.on('animationend', () => {
-                $("#prestigeBuy").removeClass('shake')
-            }, {once: true});
-            return;
-        }
+    if (money < 1000000) {
+        const prestigeButton = $("#prestigeBuy")
+        prestigeButton.addClass('shake');
+        prestigeButton.on('animationend', () => {
+            prestigeButton.removeClass('shake')
+        }, {once: true});
+        return;
+    } else {
         setMoney(0);
         Dandelion.setFlowerAmount(0);
         gardener = new Producer(50, 50, 1.2, 1.2, 1, 1, 0);
@@ -308,9 +308,10 @@ function prestige() {
         refreshShop('gardener');
         refreshShop('trowel');
         prestigeCount += 1;
-        alert("You are now prestige " + prestigeCount + "!");
+        $("#prestigeCount").html("(" + prestigeCount + ")");
+        $("#prestigeCost").html(1000000 * prestigeCount);
+        $("#prestigeBuy").addClass('grey')
     }
-
 }
 
 function storeValues(){
